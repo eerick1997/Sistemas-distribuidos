@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.7.18)  5 AUG 2019 21:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.7.18)  12 AUG 2019 11:29
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1343,29 +1343,46 @@ Overfull \hbox (94.66992pt too wide) in alignment at lines 49--50
 
 [2
 
-]) [3]
+] [3]
+LaTeX Font Info:    Font shape `T1/fnc/m/n' will be
+(Font)              scaled to size 11.15991pt on input line 77.
+LaTeX Font Info:    Font shape `T1/fnc/bx/n' in size <12> not available
+(Font)              Font shape `T1/fnc/b/n' tried instead on input line 77.
+LaTeX Font Info:    Font shape `T1/fnc/b/n' will be
+(Font)              scaled to size 11.15991pt on input line 77.
+ [4]
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+[5]) [6]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 9.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 9.
  (/home/erick/Documentos/GitHub/Sistemas-distribuidos/Notas/main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 9.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 9.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 3D30D25A913DE5C83959E43E3ABB8159;241.
+(rerunfilecheck)             Checksum: 79AC5FA14A974C6256A0E947263D10D9;741.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 9.
  ) 
 Here is how much of TeX's memory you used:
- 30076 strings out of 492623
- 551559 string characters out of 6135669
+ 30101 strings out of 492623
+ 551888 string characters out of 6135669
  786591 words of memory out of 5000000
- 33494 multiletter control sequences out of 15000+600000
- 560320 words of font info for 63 fonts, out of 8000000 for 9000
+ 33508 multiletter control sequences out of 15000+600000
+ 564544 words of font info for 67 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,11n,63p,498b,616s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf-dist/fonts/type1/urw/ncntrsbk/uncb8a.pfb></usr/share/texmf-dist/fonts/type1/urw/ncntrsbk/uncr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/ncntrsbk/uncri8a.pfb></usr/share/texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on /home/erick/Documentos/GitHub/Sistemas-distribuidos/Notas/main.pdf (4 pages, 64966 bytes).
+Output written on /home/erick/Documentos/GitHub/Sistemas-distribuidos/Notas/main.pdf (7 pages, 79016 bytes).
 PDF statistics:
- 73 PDF objects out of 1000 (max. 8388607)
- 61 compressed objects within 1 object stream
- 9 named destinations out of 1000 (max. 500000)
- 45 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 119 PDF objects out of 1000 (max. 8388607)
+ 103 compressed objects within 2 object streams
+ 18 named destinations out of 1000 (max. 500000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
 
