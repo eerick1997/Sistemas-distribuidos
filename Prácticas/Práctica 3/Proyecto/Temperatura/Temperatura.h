@@ -3,14 +3,14 @@
 
 class Temperatura{
     private:
-        int kelvin;
+        float kelvin;
     public:
-        void setTempKelvin( int kelvin );
-        void setTempFahrenheit( int fahrenheit );
-        void setTempCelsius( int celsius );
-        int getTempKelvin();
-        int getTempFahrenheit();
-        int getTempCelsius();
+        void setTempKelvin( float kelvin );
+        void setTempFahrenheit( float fahrenheit );
+        void setTempCelsius( float celsius );
+        float getTempKelvin();
+        float getTempFahrenheit();
+        float getTempCelsius();
 };
 
 #endif

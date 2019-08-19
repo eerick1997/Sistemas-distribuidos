@@ -3,26 +3,26 @@
 
 using namespace std;
 
-int Temperatura::getTempKelvin(){
+float Temperatura::getTempKelvin(){
     return kelvin;
 }
 
-int Temperatura::getTempFahrenheit(){
-    return kelvin  * ( (9 / 5) - 459.67 );
+float Temperatura::getTempFahrenheit(){
+    return ( (kelvin * 9 / 5) - 459.67 );
 }
 
-int Temperatura::getTempCelsius(){
+float Temperatura::getTempCelsius(){
     return ( kelvin - 273.15 );
 }
 
-void Temperatura::setTempKelvin( int kelvin ){
+void Temperatura::setTempKelvin( float kelvin ){
     this -> kelvin = kelvin;
 }
 
-void Temperatura::setTempFahrenheit(int fahrenheit){
+void Temperatura::setTempFahrenheit(float fahrenheit){
     this -> kelvin = (fahrenheit + 459.67) * ( 5 / 9 );
 }
 
-void Temperatura::setTempCelsius(int celsius){
+void Temperatura::setTempCelsius(float celsius){
     this -> kelvin = celsius + 273.15;
 }
