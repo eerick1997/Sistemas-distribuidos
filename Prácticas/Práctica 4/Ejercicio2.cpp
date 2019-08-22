@@ -7,6 +7,7 @@ class Fecha{
         int dia;
         int mes;
         int anio;
+        char s[1000000];
     public:
         Fecha(int = 3, int = 4, int = 2014);
         void inicializaFecha(int, int, int);
@@ -66,8 +67,8 @@ int masViejaR(Fecha *fecha1, Fecha *fecha2){
 
 int main(){
     Fecha a, b( 20, 2, 2019 );
-    int n = 10000000;
-    clock_t time_start = clock();
+    int n = 1000;
+    
     srand(time(NULL));
 
     while( n-- ){
@@ -82,13 +83,15 @@ int main(){
         
         a.inicializaFecha( dia1, mes1, anio1 );
         b.inicializaFecha( dia2, mes2, anio2 );
+        //cout << sizeof( a.s ) << endl;
         masViejaR( &a, &b );
+        //cadena( a.s );
         //a.muestraFecha();
         //b.muestraFecha();
         //cout << masVieja( a, b ) << endl;
 
     }
 
-    cout << (double)((double)(clock() - time_start) / CLOCKS_PER_SEC) << endl;
+    //cout << (double)((double)(clock() - time_start) / CLOCKS_PER_SEC) << endl;
     return 0;
 }
