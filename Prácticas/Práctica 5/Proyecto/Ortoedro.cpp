@@ -1,4 +1,8 @@
 #include "Ortoedro.h"
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
 #include <bits/stdc++.h>
 
 using namespace std;

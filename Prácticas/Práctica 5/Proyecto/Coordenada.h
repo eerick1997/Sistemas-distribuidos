@@ -1,3 +1,7 @@
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
 #ifndef COORDENADA_H_
 #define COORDENADA_H_
 

@@ -1,3 +1,7 @@
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
 #include "Coordenada.h"
 
 Coordenada::Coordenada( double xx, double yy, double zz ) : x( xx ), y ( yy ), z ( zz ){}

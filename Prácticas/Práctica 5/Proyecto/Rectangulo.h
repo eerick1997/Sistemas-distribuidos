@@ -1,3 +1,7 @@
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
 #include "Coordenada.h"
 
 #ifndef RECTANGULO_H_
