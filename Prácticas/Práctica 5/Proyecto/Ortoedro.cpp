@@ -1,8 +1,11 @@
 #include "Ortoedro.h"
+#include <bits/stdc++.h>
+
+using namespace std;
 
 Ortoedro::Ortoedro( Coordenada origen, Coordenada opuesto ) {
     //Izquierda
-    Caras.push_back( Rectangulo( Coordenada( opuesto.obtenX(), origen.obtenY, opuesto.obtenZ() ), origen ) );
+    Caras.push_back( Rectangulo( Coordenada( opuesto.obtenX(), origen.obtenY(), opuesto.obtenZ() ), origen ) );
     //Arriba
     Caras.push_back( Rectangulo( Coordenada( origen.obtenX(), origen.obtenY(), opuesto.obtenZ() ), opuesto ) );
     //Derecha
@@ -14,14 +17,32 @@ Ortoedro::Ortoedro( Coordenada origen, Coordenada opuesto ) {
     //Frente
     Caras.push_back( Rectangulo( Coordenada( opuesto.obtenX(), origen.obtenY(), opuesto.obtenZ() ), Coordenada( opuesto.obtenX(), opuesto.obtenY(), origen.obtenZ() ) ) );
 }
+
 vector< Coordenada > Ortoedro::obtieneVertices(){
-    return Caras;
+    vector< Coordenada > vertices;
+    vertices.push_back( Caras[ 0 ].obtenSupIzquierda() );
+    vertices.push_back( Caras[ 0 ].obtenInfDerecha() );
+    vertices.push_back( Caras[ 1 ].obtenSupIzquierda() );
+    vertices.push_back( Caras[ 1 ].obtenInfDerecha() );
+    vertices.push_back( Caras[ 2 ].obtenInfDerecha() );
+    vertices.push_back( Caras[ 3 ].obtenInfDerecha() );
+    vertices.push_back( Caras[ 5 ].obtenSupIzquierda() );
+    vertices.push_back( Caras[ 5 ].obtenInfDerecha() );
+    return vertices;
 }
-double obtieneArea(){
-
+double Ortoedro::obtieneArea(){
+    double X, Y, Z;
+    X = abs( Caras[ 5 ].obtenInfDerecha().obtenX() - Caras[ 4 ].obtenInfDerecha().obtenX() );
+    Y = abs( Caras[ 0 ].obtenInfDerecha().obtenY() - Caras[ 2 ].obtenInfDerecha().obtenY() );
+    Z = abs( Caras[ 1 ].obtenInfDerecha().obtenZ() - Caras[ 3 ].obtenInfDerecha().obtenZ() );
+    return ( ( 2 * X * Y ) + ( 2 * Y * Z ) + ( 2 * X * Z ) );
 }
 
-double obtieneVolumen(){
-    
+double Ortoedro::obtieneVolumen(){
+    double X, Y, Z;
+    X = abs( Caras[ 5 ].obtenInfDerecha().obtenX() - Caras[ 4 ].obtenInfDerecha().obtenX() );
+    Y = abs( Caras[ 0 ].obtenInfDerecha().obtenY() - Caras[ 2 ].obtenInfDerecha().obtenY() );
+    Z = abs( Caras[ 1 ].obtenInfDerecha().obtenZ() - Caras[ 3 ].obtenInfDerecha().obtenZ() );
+    return ( X * Y * Z );
 }
 
