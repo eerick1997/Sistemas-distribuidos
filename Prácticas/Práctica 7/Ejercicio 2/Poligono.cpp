@@ -5,7 +5,7 @@ using namespace std;
 
 void Poligono::anadieVertice( Coordenada coordenada ){
     vertices.push_back( coordenada );
-    Coordenada origen = vertices[ 0 ]; 
+    Coordenada origen( 0, 0 ); 
     double mag = pow( coordenada.obtenerX() - origen.obtenerX(), 2 );
     mag += pow( coordenada.obtenerY() - origen.obtenerY(), 2 );
     vertices[ vertices.size() - 1 ].aniadeMagnitud( sqrt( mag ) );
