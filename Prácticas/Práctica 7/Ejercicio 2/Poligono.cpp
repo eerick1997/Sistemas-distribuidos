@@ -22,7 +22,7 @@ void Poligono::imprimeVertices(){
 }
 
 bool ordenaA( Coordenada A, Coordenada B){
-    return ( A.obtenerX() < B.obtenerX() && A.obtenerY() < B.obtenerY() );
+    return ( A.obtenerMagnitud() < B.obtenerMagnitud() );
 }
 
 void Poligono::OrdenarVertices(){
