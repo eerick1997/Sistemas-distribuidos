@@ -1,0 +1,5 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Escalabilidad (1.4.4)}{2}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Preguntas}{2}{section.1.1}% 
+\contentsline {chapter}{\numberline {2}Tratamiento de fallos (1.4.5)}{4}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Preguntas}{5}{section.2.1}% 
