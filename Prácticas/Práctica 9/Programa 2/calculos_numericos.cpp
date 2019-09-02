@@ -9,7 +9,7 @@ int main ()
 {
 
 	double i = 0;
-	int Max = 100000000;
+	int Max = 10000000;
 	double seno, coseno, tangente, logaritmo, raizCuad;
 
 	while (i < Max)

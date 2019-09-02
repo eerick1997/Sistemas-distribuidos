@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include <time.h>
+#include <string.h>
 
 char* nueva_palabra(){
     char *cadenita = (char *)malloc( 4 * sizeof( char ) );
@@ -22,10 +22,10 @@ int main(){
     scanf("%d", &n);
     for( i = 0; i < n; i++ ){
         cadenita = nueva_palabra();
-        memcpy(cadenota + strlen( cadenota ), cadenita, sizeof(cadenita));
+        memcpy(cadenota + i * 4, cadenita, sizeof(cadenita));
     }
     ans = 0;
-    for( i = 0; i < strlen( cadenota ); i++){
+    for( i = 0; i < 4 * n; i++){
         for( j = i, k = 0, c = 0; j < i + 3; j++, k++ ){
             if( ipn[ k ] != cadenota[ j ] )
                 break;

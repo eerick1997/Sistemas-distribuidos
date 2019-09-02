@@ -13,4 +13,3 @@ while(i<n):
     logaritmo+=log(i)
     raizCUadrada+=sqrt(i)
     i+=1
-print("Seno: {}\nCoseno: {}\nTangente: {}\nLogaritmo: {}\nRaiz: {}\n".format(seno, coseno,tangente, logaritmo, raizCUadrada))
