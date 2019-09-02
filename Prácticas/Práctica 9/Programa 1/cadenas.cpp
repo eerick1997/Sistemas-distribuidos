@@ -20,7 +20,6 @@ int main(){
     
     int ans = 0;
     int index = 0;
-    cout << cadenota << endl;
     for( int i = 0; i < cadenota.size(); i++ ){
         index = cadenota.find( "IPN", i );
         if( index != -1 )
