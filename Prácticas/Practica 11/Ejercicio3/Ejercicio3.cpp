@@ -3,7 +3,7 @@
 using namespace std;
 int main (){
 	double i = 0;
-	int Max = 200000000;
+	int Max = 150000000;
 	double seno, coseno, tangente, logaritmo, raizCuad;
 	while (i < Max){
 		seno += sin(i);
