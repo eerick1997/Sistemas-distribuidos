@@ -1,0 +1,477 @@
+ 
+#include <bits/stdc++.h>
+#define LIM 0.00001
+using namespace std;
+
+int main(){
+    double n;
+    cin >> n;
+    if( n < 0 )
+        cout << "La solucion no está en el conjunto de los reales" << endl;
+    else {
+        double b = n, h = 1;
+        while( (b - h) > LIM ){ 
+            b = (h + b) / 2;
+            h = n / b;
+        }
+        cout << b << endl;
+    }
+    return 0;
+}
+
+************************************************************************************************
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int segundos;
+    int horas, minutos;
+
+    cin >> segundos;
+    horas = (segundos / 3600);
+    segundos -= (horas * 3600);
+    minutos = (segundos / 60);
+    segundos -= (minutos * 60);
+    cout << horas << " horas " << minutos << " minutos " << segundos << " segundos";
+    return 0;
+}
+
+************************************************************************************************
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int n;
+    cin >> n;
+    cout << (0.5)*(9.81)*n*n;
+    return 0;
+}
+
+************************************************************************************************
+
+#ifndef TEMPERATURA_H_
+#define TEMPERATURA_H_
+
+class Temperatura{
+    private:
+        float kelvin;
+    public:
+        void setTempKelvin( float kelvin );
+        void setTempFahrenheit( float fahrenheit );
+        void setTempCelsius( float celsius );
+        float getTempKelvin();
+        float getTempFahrenheit();
+        float getTempCelsius();
+};
+
+#endif
+
+-------------------------------------------------------------------------------
+
+#include "Temperatura.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+float Temperatura::getTempKelvin(){
+    return kelvin;
+}
+
+float Temperatura::getTempFahrenheit(){
+    return ( (kelvin * 9 / 5) - 459.67 );
+}
+
+float Temperatura::getTempCelsius(){
+    return ( kelvin - 273.15 );
+}
+
+void Temperatura::setTempKelvin( float kelvin ){
+    this -> kelvin = kelvin;
+}
+
+void Temperatura::setTempFahrenheit(float fahrenheit){
+    this -> kelvin = (fahrenheit + 459.67) * ( 5 / 9 );
+}
+
+void Temperatura::setTempCelsius(float celsius){
+    this -> kelvin = celsius + 273.15;
+}
+
+-------------------------------------------------------------------------------
+
+#include "Temperatura.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    Temperatura a;
+    a.setTempKelvin( 10.0 );
+    cout << a.getTempKelvin() << endl;
+    cout << a.getTempCelsius() << endl;
+    cout << a.getTempFahrenheit() << endl;
+    a.setTempFahrenheit( 10 );
+    cout << a.getTempKelvin() << endl;
+    cout << a.getTempCelsius() << endl;
+    cout << a.getTempFahrenheit() << endl;
+    a.setTempCelsius( 10 );
+    cout << a.getTempKelvin() << endl;
+    cout << a.getTempCelsius() << endl;
+    cout << a.getTempFahrenheit() << endl;
+    return 0;
+}
+
+***************************************************************************************
+
+#include <bits/stdc++.h>
+#ifndef FRACCION_H_
+#define FRACCION_H_
+
+class Fraccion{
+    private: 
+        int numerador;
+        int denominador;
+    public:
+        double getResultado();
+        std::string reducirFraccion();
+        Fraccion( int numerador , int denominador );
+};
+
+#endif
+
+-------------------------------------------------------------------------------
+
+#include "Fraccion.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+Fraccion::Fraccion( int numerador, int denominador ){
+    this -> numerador = numerador;
+    this -> denominador = denominador;
+}
+
+double Fraccion::getResultado(){
+    return (double)(numerador / denominador); 
+}
+
+string Fraccion::reducirFraccion(){
+    string ans = "";
+    int GCD = __gcd( numerador, denominador );
+    ans = to_string(numerador / GCD);
+    ans += "/" + to_string( denominador / GCD );
+    return ( ans );
+}
+
+-------------------------------------------------------------------------------
+
+#include "Fraccion.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    Fraccion fraccion(18, 15);
+    cout << fraccion.getResultado() << endl;
+    cout << fraccion.reducirFraccion() << endl;
+    return 0;
+}
+
+***************************************************************************************
+
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
+#include "Coordenada.h"
+
+#ifndef RECTANGULO_H_
+#define RECTANGULO_H_
+
+class Rectangulo{
+    private:
+        Coordenada superiorIzquierda;
+        Coordenada inferiorDerecha;
+
+    public:
+        Rectangulo( Coordenada supIzquierda, Coordenada infDerecha );
+        Coordenada obtenSupIzquierda();
+        Coordenada obtenInfDerecha();
+        double obtenerArea();
+        
+};
+
+#endif
+
+-------------------------------------------------------------------------------
+
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
+#include "Rectangulo.h"
+#include <bits/stdc++.h>
+
+Rectangulo::Rectangulo( Coordenada supIzquierda, Coordenada InfDerecha ) : superiorIzquierda( supIzquierda ), inferiorDerecha( InfDerecha ){}
+
+Coordenada Rectangulo::obtenSupIzquierda(){
+    return superiorIzquierda;
+}
+
+Coordenada Rectangulo::obtenInfDerecha(){
+    return inferiorDerecha;
+}
+
+double Rectangulo::obtenerArea(){
+    double X = fabs( superiorIzquierda.obtenZ() - inferiorDerecha.obtenZ() );
+    double Y = fabs( superiorIzquierda.obtenY() - inferiorDerecha.obtenY() );
+    double Z = fabs( superiorIzquierda.obtenX() - inferiorDerecha.obtenX() );
+    double area;
+    if( X == 0 )
+        area = Y * Z;
+    else if( Y == 0 )
+        area = X * Z;
+    else
+        area = X * Y;
+    return area;
+}
+
+-------------------------------------------------------------------------------
+
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
+#include "Rectangulo.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#ifndef ORTOEDRO_H_
+#define ORTOEDRO_H_
+class Ortoedro{
+    private:
+        vector< Rectangulo > Caras;
+
+    public:
+        Ortoedro( Coordenada origen, Coordenada opuesto );
+        vector< Coordenada > obtieneVertices();
+        double obtieneArea();
+        double obtieneVolumen();
+};
+#endif
+
+-------------------------------------------------------------------------------
+
+#include "Ortoedro.h"
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
+#include <bits/stdc++.h>
+
+using namespace std;
+
+Ortoedro::Ortoedro( Coordenada origen, Coordenada opuesto ) {
+    //Izquierda
+    Caras.push_back( Rectangulo( Coordenada( opuesto.obtenX(), origen.obtenY(), opuesto.obtenZ() ), origen ) );
+    //Arriba
+    Caras.push_back( Rectangulo( Coordenada( origen.obtenX(), origen.obtenY(), opuesto.obtenZ() ), opuesto ) );
+    //Derecha
+    Caras.push_back( Rectangulo( opuesto, Coordenada( origen.obtenX(), opuesto.obtenY(), origen.obtenZ() ) ) );
+    //Abajo
+    Caras.push_back( Rectangulo( origen, Coordenada( opuesto.obtenX(), opuesto.obtenY(), origen.obtenZ() ) ) );
+    //Fondo
+    Caras.push_back( Rectangulo( Coordenada( origen.obtenX(), origen.obtenY(), opuesto.obtenZ() ), Coordenada( origen.obtenX(), opuesto.obtenY(), origen.obtenZ() ) ) );
+    //Frente
+    Caras.push_back( Rectangulo( Coordenada( opuesto.obtenX(), origen.obtenY(), opuesto.obtenZ() ), Coordenada( opuesto.obtenX(), opuesto.obtenY(), origen.obtenZ() ) ) );
+}
+
+vector< Coordenada > Ortoedro::obtieneVertices(){
+    vector< Coordenada > vertices;
+    vertices.push_back( Caras[ 0 ].obtenSupIzquierda() );
+    vertices.push_back( Caras[ 0 ].obtenInfDerecha() );
+    vertices.push_back( Caras[ 1 ].obtenSupIzquierda() );
+    vertices.push_back( Caras[ 1 ].obtenInfDerecha() );
+    vertices.push_back( Caras[ 2 ].obtenInfDerecha() );
+    vertices.push_back( Caras[ 3 ].obtenInfDerecha() );
+    vertices.push_back( Caras[ 5 ].obtenSupIzquierda() );
+    vertices.push_back( Caras[ 5 ].obtenInfDerecha() );
+    return vertices;
+}
+double Ortoedro::obtieneArea(){
+    double X, Y, Z;
+    X = abs( Caras[ 5 ].obtenInfDerecha().obtenX() - Caras[ 4 ].obtenInfDerecha().obtenX() );
+    Y = abs( Caras[ 0 ].obtenInfDerecha().obtenY() - Caras[ 2 ].obtenInfDerecha().obtenY() );
+    Z = abs( Caras[ 1 ].obtenInfDerecha().obtenZ() - Caras[ 3 ].obtenInfDerecha().obtenZ() );
+    return ( ( 2 * X * Y ) + ( 2 * Y * Z ) + ( 2 * X * Z ) );
+}
+
+double Ortoedro::obtieneVolumen(){
+    double X, Y, Z;
+    X = abs( Caras[ 5 ].obtenInfDerecha().obtenX() - Caras[ 4 ].obtenInfDerecha().obtenX() );
+    Y = abs( Caras[ 0 ].obtenInfDerecha().obtenY() - Caras[ 2 ].obtenInfDerecha().obtenY() );
+    Z = abs( Caras[ 1 ].obtenInfDerecha().obtenZ() - Caras[ 3 ].obtenInfDerecha().obtenZ() );
+    return ( X * Y * Z );
+}
+
+-------------------------------------------------------------------------------
+
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
+#ifndef COORDENADA_H_
+#define COORDENADA_H_
+
+class Coordenada{
+    private:
+        double x;
+        double y;
+        double z;
+    public:
+        Coordenada( double xx, double yy, double zz );
+        double obtenX();
+        double obtenY();
+        double obtenZ();
+};
+
+#endif
+
+-------------------------------------------------------------------------------
+
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
+#include "Coordenada.h"
+
+Coordenada::Coordenada( double xx, double yy, double zz ) : x( xx ), y ( yy ), z ( zz ){}
+
+double Coordenada::obtenX(){
+    return x;
+}
+
+double Coordenada::obtenY(){
+    return y;
+}
+
+double Coordenada::obtenZ(){
+    return z;
+}
+
+-------------------------------------------------------------------------------
+
+/**
+ * Author: Erick Efraín Vargas Romero
+ * Date: 25 / 08 / 2019
+*/
+#include "Ortoedro.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+    int i = 0;
+    int x1, y1, z1, x2, y2, z2;
+    cin >> x1 >> y1 >> z1 >> x2 >> y2 >> z2;
+    Ortoedro ortoedro( Coordenada( x1, y1, z1 ), Coordenada( x2, y2, z2 ) );
+    vector< Coordenada > vertices = ortoedro.obtieneVertices();
+    cout << "Area: " << ortoedro.obtieneArea() << endl;
+    cout << "Volumen: " << ortoedro.obtieneVolumen() << endl;
+    for( auto vertice : vertices ){
+        cout << "\n" << ++i << " vértice (" << vertice.obtenX() << ", " << vertice.obtenY() << ", " << vertice.obtenZ() << ")";
+    }
+    cout << endl;
+    return 0;
+}
+
+***************************************************************************************
+
+#ifndef NUMERO_H_
+#define NUMERO_H_
+typedef long long int lli;
+
+class Numero{
+    private:
+        lli numero;
+        bool esPrimo;
+    public:
+        Numero( bool = true );
+        void ponNumero( lli );
+        void ponEsPrimo( bool );
+        lli obtenNumero();
+        bool obtenEsPrimo();
+};
+#endif
+
+-------------------------------------------------------------------------------
+
+#include "Numero.h"
+
+typedef long long int lli;
+
+Numero::Numero( bool ){}
+
+void Numero::ponNumero( lli Numero ){
+    numero = Numero;
+}
+
+void Numero::ponEsPrimo( bool EsPrimo ){
+    esPrimo = EsPrimo;
+}
+
+bool Numero::obtenEsPrimo(){
+    return esPrimo;
+}
+
+lli Numero::obtenNumero(){
+    return numero;
+}
+
+-------------------------------------------------------------------------------
+
+#include <bits/stdc++.h>
+#include "Numero.h"
+
+using namespace std;
+typedef long long int lli;
+
+int main(){
+    lli n, raiz;
+    vector< Numero > criba;
+    cin >> n;
+    criba.assign( n + 1, Numero() );
+    criba[ 0 ].ponEsPrimo( false ); 
+    criba[ 0 ].ponNumero( 0 );
+    criba[ 1 ].ponEsPrimo( false );
+    criba[ 1 ].ponNumero( 1 );
+
+    for( int i = 4; i <= n; i += 2){
+        criba[ i ].ponNumero( i );
+        criba[ i ].ponEsPrimo( false );
+    }
+    raiz = sqrt( n );
+    for( int i = 3; i <= n; i += 2 ){
+        criba[ i ].ponNumero( i );
+        if( criba[ i ].obtenEsPrimo() ){
+            if( i <= raiz ){
+                for( int j = i * i; j <= n; j += 2 * i ){
+                    criba[ j ].ponEsPrimo( false );
+                    if( criba[ j ].obtenNumero() != 0 )
+                        criba[ j ].ponNumero( j );
+                }
+            }
+        }
+    }
+
+    for( auto nn : criba )
+        if( nn.obtenEsPrimo() )
+            cout << nn.obtenNumero() << " ";
+    cout << endl;
+    return 0;
+}
