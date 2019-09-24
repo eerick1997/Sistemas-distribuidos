@@ -1,6 +1,7 @@
 #include "PaqueteDatagrama.h"
 #include <sys/socket.h>
 #include <bits/stdc++.h>
+#include <netinet/in.h>
 
 class SocketDatagrama{
     public:
