@@ -6,8 +6,15 @@ using namespace std;
 PaqueteDatagrama::PaqueteDatagrama( char *datos, unsigned int longitud, char *dirIP, int puerto ){
     this -> datos = datos;
     this -> longitud = longitud;
-    strcpy( ip, dirIP );
+    this -> datos = new char[ longitud ];
+    this -> datos = datos; 
+    strcpy( this -> ip, dirIP );
     this -> puerto = puerto;
+}
+
+PaqueteDatagrama::PaqueteDatagrama( unsigned int longitud ){
+    this -> longitud = longitud;
+    this -> datos = new char[ longitud ];
 }
 
 char *PaqueteDatagrama::obtieneDireccion(){
@@ -35,5 +42,6 @@ void PaqueteDatagrama::inicializaIp( char *IP ){
 }
 
 void PaqueteDatagrama::inicializaDatos( char *datos ){
-    strcpy( this -> datos, datos );
+    this -> datos = new char[ longitud ];
+    this -> datos = datos;
 }
