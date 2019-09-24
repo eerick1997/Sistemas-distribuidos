@@ -3,49 +3,59 @@
 
 using namespace std;
 
-PaqueteDatagrama::PaqueteDatagrama( char *datos, unsigned int longitud, char *dirIP, int puerto ){
-    this -> datos = datos;
-    this -> longitud = longitud;
-    this -> datos = new char[ longitud ];
-    this -> datos = datos; 
-    memcpy( this -> ip, dirIP, sizeof( dirIP ) );
-    this -> puerto = puerto;
+PaqueteDatagrama::PaqueteDatagrama(char *datos, unsigned int longitud, char *dirIP, int puerto)
+{
+    this->datos = datos;
+    this->longitud = longitud;
+    this->datos = new char[longitud];
+    memcpy(this->datos, datos, longitud);
+    memcpy(this->ip, dirIP, sizeof(this->ip));
+    this->puerto = puerto;
 }
 
-PaqueteDatagrama::PaqueteDatagrama( unsigned int longitud ){
-    this -> longitud = longitud;
-    this -> datos = new char[ longitud ];
+PaqueteDatagrama::PaqueteDatagrama(unsigned int longitud)
+{
+    this->longitud = longitud;
+    this->datos = new char[longitud];
 }
 
-char *PaqueteDatagrama::obtieneDireccion(){
+char *PaqueteDatagrama::obtieneDireccion()
+{
     return ip;
 }
 
-unsigned int PaqueteDatagrama::obtieneLongitud(){
+unsigned int PaqueteDatagrama::obtieneLongitud()
+{
     return longitud;
 }
 
-int PaqueteDatagrama::obtienePuerto(){
-    int puerto;
+int PaqueteDatagrama::obtienePuerto()
+{
+    return puerto;
 }
 
-char *PaqueteDatagrama::obtieneDatos(){
+char *PaqueteDatagrama::obtieneDatos()
+{
     return datos;
 }
 
-void PaqueteDatagrama::inicializaPuerto( int puerto ){
-    this -> puerto = puerto;
+void PaqueteDatagrama::inicializaPuerto(int puerto)
+{
+    this->puerto = puerto;
 }
 
-void PaqueteDatagrama::inicializaIp( char *IP ){
-    memcpy( ip, IP, sizeof( IP ) );
+void PaqueteDatagrama::inicializaIp(char *IP)
+{
+    memcpy(this->ip, IP, sizeof(this->ip));
 }
 
-void PaqueteDatagrama::inicializaDatos( char *datos ){
-    this -> datos = new char[ longitud ];
-    this -> datos = datos;
+void PaqueteDatagrama::inicializaDatos(char *datos)
+{
+    this->datos = new char[longitud];
+    memcpy(this->datos, datos, sizeof(datos));
 }
 
-PaqueteDatagrama::~PaqueteDatagrama(){
+PaqueteDatagrama::~PaqueteDatagrama()
+{
     delete[] datos;
 }
