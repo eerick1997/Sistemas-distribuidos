@@ -8,7 +8,7 @@ PaqueteDatagrama::PaqueteDatagrama( char *datos, unsigned int longitud, char *di
     this -> longitud = longitud;
     this -> datos = new char[ longitud ];
     this -> datos = datos; 
-    strcpy( this -> ip, dirIP );
+    memcpy( this -> ip, dirIP, sizeof( dirIP ) );
     this -> puerto = puerto;
 }
 
@@ -38,10 +38,14 @@ void PaqueteDatagrama::inicializaPuerto( int puerto ){
 }
 
 void PaqueteDatagrama::inicializaIp( char *IP ){
-    strcpy( ip, IP );
+    memcpy( ip, IP, sizeof( IP ) );
 }
 
 void PaqueteDatagrama::inicializaDatos( char *datos ){
     this -> datos = new char[ longitud ];
     this -> datos = datos;
+}
+
+PaqueteDatagrama::~PaqueteDatagrama(){
+    delete[] datos;
 }
