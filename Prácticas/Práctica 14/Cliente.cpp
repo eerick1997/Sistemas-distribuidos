@@ -14,7 +14,7 @@ int main()
     // strcpy(ip, i.c_str());
     // PaqueteDatagrama paq(msg, m.length() + 1, ip, 7200);
     // sock.envia(paq);
-    string i = "127.0.0.1";
+    string i = "10.100.66.155";
     char *ip = new char[i.length()];
     strcpy(ip, i.c_str());
     num[0] = 5;

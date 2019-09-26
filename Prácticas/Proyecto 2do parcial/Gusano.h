@@ -1,18 +1,17 @@
 #include "Coordenada.h"
-#include <vector>
+#include <bits/stdc++.h>
 
 #ifndef GUSANO_H_
 #define GUSANO_H_
 class Gusano{
     private:
-        std::vector< Coordenada > cuerpo;
+        std::vector< Coordenada > gusano;
         int tamanio;
-    
+
     public:
-        Gusano( int );
+        Gusano( int, double, double, int );
         std::vector< Coordenada > obtenerGusano();
         int obtenerTamanio();
-        void rotarIzquierda();
-        void rotarDerecha();
+        void mover();
 };
 #endif
