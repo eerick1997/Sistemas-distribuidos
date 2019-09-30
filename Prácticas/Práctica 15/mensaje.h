@@ -1,6 +1,6 @@
 #define TAM_MAX_DATA 4000
 
-#define suma 1;
+#define suma 1
 
 struct mensaje{
     //0 = SOLICITUD
