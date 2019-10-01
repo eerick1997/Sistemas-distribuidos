@@ -9,4 +9,4 @@ class Solicitud{
     private:
         SocketDatagrama *socketlocal;
 };
-#endif SOLICITUD_H_
+#endif

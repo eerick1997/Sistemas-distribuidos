@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include <unistd.h>
 #include "Gusano.h"
-#include "Libraries/gfx.h"
+#include "gfx.h"
 
 using namespace std;
 
@@ -35,8 +35,9 @@ int main(){
                 gfx_line( gusanos[ j ].obtenerGusano()[ i ].obtenerX(),
                 gusanos[ j ].obtenerGusano()[ i ].obtenerY(),
                 gusanos[ j ].obtenerGusano()[ i + 1 ].obtenerX(),
-                gusanos[ j ].obtenerGusano()[ i + 1 ].obtenerY() ), gfx_flush();
+                gusanos[ j ].obtenerGusano()[ i + 1 ].obtenerY() );
         }
+        gfx_flush();
         usleep( 41666 );
     }
     return 0;

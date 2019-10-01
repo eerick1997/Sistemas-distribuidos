@@ -4,7 +4,7 @@
 using namespace std;
 int main()
 {
-    SocketDatagrama sock(6666);
+    /*SocketDatagrama sock(6666);
     int num[2], res;
     string i = "10.100.66.155";
     char *ip = new char[i.length()];
@@ -12,11 +12,11 @@ int main()
     num[0] = 5;
     num[1] = 2;
     PaqueteDatagrama paq((char *)num, 2 * sizeof(int), ip, 7200);
-    sock.envia(paq);
+    sock.envia(paq);*/
 
-    sock.recibe(paq);
+    /*sock.recibe(paq);
     printf("IP: %s\t|\tPORT: %d \n", paq.obtieneDireccion(), paq.obtienePuerto());
     memcpy(&res, paq.obtieneDatos(), 4);
-    printf("Respuesta: %d\n", res);
+    printf("Respuesta: %d\n", res);*/
     return 1;
 }
