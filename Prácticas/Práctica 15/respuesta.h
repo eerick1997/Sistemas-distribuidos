@@ -8,5 +8,6 @@ class Respuesta{
         void sendReply( char *respuesta );
     private:
         SocketDatagrama *socketlocal;
+        PaqueteDatagrama *clientePaqueteDatagrama;
 };
 #endif 

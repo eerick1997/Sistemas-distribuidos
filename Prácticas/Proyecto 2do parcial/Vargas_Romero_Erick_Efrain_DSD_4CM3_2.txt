@@ -1,0 +1,255 @@
+#ifndef COORDENADA_H_
+#define COORDENADA_H_H
+class Coordenada{
+    private:
+        double x, y;
+    
+    public:
+        Coordenada( double X, double Y );
+        double obtenerX();
+        double obtenerY();
+        void ponerX( double X );
+        void ponerY( double Y );
+        void incrementaX();
+        void incrementaY();
+        void incrementaXY();
+        void decrementaX();
+        void decrementaY();
+        void decrementaXY();
+        void decrementaXincY();
+        void decrementaYincX();
+};
+#endif
+
+---------------------------------------------------------------------
+
+#include "Coordenada.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+Coordenada::Coordenada( double X, double Y ) : x(X), y(Y){}
+
+double Coordenada::obtenerX(){
+    return x;
+}
+
+double Coordenada::obtenerY(){
+    return y;
+}
+
+void Coordenada::ponerX( double X ){
+    x = X;
+}
+
+void Coordenada::ponerY( double Y ){
+    y = Y;
+}
+
+void Coordenada::incrementaX(){
+    x++;
+}
+
+void Coordenada::incrementaY(){
+    y++;
+}
+
+void Coordenada::incrementaXY(){
+    x++, y++;
+}
+
+void Coordenada::decrementaX(){
+    if( x > 0 )
+        x--;
+}
+
+void Coordenada::decrementaY(){
+    if( y > 0 )
+        y--;
+}
+
+void Coordenada::decrementaXY(){
+    if( x > 0 && y > 0)
+        x--, y--;
+}
+
+void Coordenada::decrementaXincY(){
+    if( x > 0 )
+        x--;
+    y++;
+}
+
+void Coordenada::decrementaYincX(){
+    if( y > 0 )
+        y--;
+    x++;
+}
+
+----------------------------------------------------------------------------------------------------
+
+#include "Coordenada.h"
+#include <bits/stdc++.h>
+
+#ifndef GUSANO_H_
+#define GUSANO_H_
+class Gusano{
+    private:
+        std::vector< Coordenada > gusano;
+        int tamanio;
+
+    public:
+        Gusano( int, double, double, int );
+        std::vector< Coordenada > obtenerGusano();
+        int obtenerTamanio();
+        void mover();
+};
+#endif
+
+------------------------------------------------------------------------------------------------------
+
+#include "Gusano.h"
+#include <bits/stdc++.h>
+
+using namespace std;
+
+Gusano::Gusano( int tamanio, double x, double y, int mover_a ){
+    //cout << "Gusano" << endl;
+    this -> tamanio = tamanio;
+    //Mover hacía abajo
+    if( mover_a == 0 )
+        for( int i = 0; i < tamanio; i++ )
+            gusano.push_back( Coordenada( x + i, y ) );
+    else if( mover_a == 1 )
+        for( int i = 0; i < tamanio; i++ )
+            gusano.push_back( Coordenada( x, y + i) );
+    else 
+        for( int i = 0; i < tamanio; i++ )
+            gusano.push_back( Coordenada( x + i, y + i ) );
+}
+
+vector< Coordenada > Gusano::obtenerGusano(){
+    return gusano;
+}
+
+int Gusano::obtenerTamanio(){
+    return tamanio;
+}
+//Debemos tener 4 estados, rotar izquierda
+//Rotar derecha
+//Avanzar X
+//Avanzar Y
+void Gusano::mover(){
+    /*random_device randomDevice;
+    mt19937 generator( randomDevice() );
+    uniform_int_distribution<> distribution(0, 7);*/
+    int random = rand() % 10;//distribution( generator );
+
+    for( int i = tamanio - 1; i >= 1; i-- )
+        gusano[ i ] = gusano[ i - 1 ];
+
+    switch ( random ){
+        case 0:
+            gusano[ 0 ].incrementaX();
+        break;
+        
+        case 1:
+            gusano[ 0 ].incrementaY();
+        break;
+
+        case 2:
+            gusano[ 0 ].incrementaXY();
+        break;
+
+        case 3:
+            gusano[ 0 ].decrementaX();
+        break;
+
+        case 4:
+            gusano[ 0 ].decrementaY();
+        break;
+
+        case 5:
+            gusano[ 0 ].decrementaXY();
+        break;
+
+        case 6:
+            gusano[ 0 ].decrementaYincX();
+        break;
+
+        case 7:
+            gusano[ 0 ].decrementaYincX();
+        break;
+
+        case 8:
+            gusano[ 0 ].decrementaXincY();
+        break;
+
+        default:
+            gusano[ 0 ].decrementaXincY();
+        break;
+    }
+
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+#include <bits/stdc++.h>
+#include <unistd.h>
+#include "Gusano.h"
+#include "gfx.h"
+
+using namespace std;
+
+int main(){
+    int n_gusanos = 0, longitud = 0;
+    unsigned int ancho = 1920;
+    unsigned int largo = 1080;
+    srand( time(nullptr) );
+    random_device device;
+    mt19937 generator( device() );
+    uniform_int_distribution<> distribution_ancho(0, ancho);
+    uniform_int_distribution<> distribution_largo(0, largo);
+    uniform_int_distribution<> distribution_posicion(0, 2);
+
+    vector< Gusano > gusanos;
+    cin >> n_gusanos >> longitud; 
+    
+    for( int i = 0; i < n_gusanos; i++){
+        double x = distribution_ancho( generator );
+        double y = distribution_largo( generator );
+        int mover_a = distribution_posicion( generator );
+        gusanos.push_back( Gusano( longitud, x, y, mover_a ) );
+    }
+    gfx_open( largo, ancho, "Ejemplo microanimación gusanos");
+    gfx_color( 0, 200, 100 );
+    while( true ){
+        gfx_clear();
+        for( int j = 0; j < n_gusanos; j++ ){
+            (gusanos[ j ].mover());
+            for( int i = 0; i < longitud - 1; i++ )
+                gfx_line( gusanos[ j ].obtenerGusano()[ i ].obtenerX(),
+                gusanos[ j ].obtenerGusano()[ i ].obtenerY(),
+                gusanos[ j ].obtenerGusano()[ i + 1 ].obtenerX(),
+                gusanos[ j ].obtenerGusano()[ i + 1 ].obtenerY() );
+        }
+        gfx_flush();
+        usleep( 41666 );
+    }
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+all: project
+
+project: Gusano.o Coordenada.o gfx.o main.o
+	g++ gfx.o Gusano.o Coordenada.o main.o -lX11 -o main 
+gfx.o: gfx.c
+	gcc gfx.c -c
+Gusano.o: Gusano.cpp
+	g++ Gusano.cpp -c
+Coordenada.o: Coordenada.cpp
+	g++ Coordenada.cpp -c
+main.o: main.cpp
+	g++ main.cpp -c
+

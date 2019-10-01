@@ -11,4 +11,4 @@ struct mensaje{
     //Identificador de la operación
     int operationID;
     char arguments[TAM_MAX_DATA];
-}
+};
