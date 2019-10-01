@@ -1,22 +1,17 @@
-#include "SocketDatagrama.h"
-#include <string>
+#include "Solicitud.h"
 #include <bits/stdc++.h>
 using namespace std;
 int main()
 {
-    /*SocketDatagrama sock(6666);
-    int num[2], res;
-    string i = "10.100.66.155";
+    string i = "127.0.0.1";
     char *ip = new char[i.length()];
     strcpy(ip, i.c_str());
-    num[0] = 5;
-    num[1] = 2;
-    PaqueteDatagrama paq((char *)num, 2 * sizeof(int), ip, 7200);
-    sock.envia(paq);*/
-
-    /*sock.recibe(paq);
-    printf("IP: %s\t|\tPORT: %d \n", paq.obtieneDireccion(), paq.obtienePuerto());
-    memcpy(&res, paq.obtieneDatos(), 4);
-    printf("Respuesta: %d\n", res);*/
-    return 1;
+    Solicitud sol;
+    int num[2], res;
+    num[0] = 125;
+    num[1] = 32;
+    char *resServer = sol.doOperation(ip, 7200, 3, (char *)num);
+    memcpy(&res, resServer, sizeof(res));
+    cout << "Suma = " << res << endl;
+    return 0;
 }
