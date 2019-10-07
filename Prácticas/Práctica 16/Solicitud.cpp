@@ -9,7 +9,7 @@ Solicitud::Solicitud()
 char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *arguments)
 {
     short n = 7;
-    time_t segundos = 2;
+    time_t segundos = 0;
     suseconds_t microsegundos = 500000;
 
     struct mensaje datos;
@@ -28,7 +28,11 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
         if (result > 0)
             break;
     }
-
+    if (n < 0)
+    {
+        printf("Servidor no disponible\n");
+        exit(0);
+    }
     memcpy(&response, paq.obtieneDatos(), paq.obtieneLongitud());
 
     return response.arguments;

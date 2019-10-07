@@ -10,7 +10,7 @@ int main()
     strcpy(ip, i.c_str());
     Solicitud sol;
     int num[2], res, n;
-    cout << "Ingrese el numero de ciclos:";
+    cout << "Ingrese el numero de ciclos: ";
     cin >> n;
     num[0] = 125;
     num[1] = 32;
