@@ -80,7 +80,7 @@ int SocketDatagrama::recibeTimeout(PaqueteDatagrama &p, time_t segundos, susecon
         p.inicializaPuerto((int)ntohs(direccionForanea.sin_port));
         p.inicializaDatos(datos);
     }
-    setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, NULL, NULL);
+    setsockopt(s, SOL_SOCKET, SO_RCVTIMEO, NULL, 0);
     return n;
 }
 
