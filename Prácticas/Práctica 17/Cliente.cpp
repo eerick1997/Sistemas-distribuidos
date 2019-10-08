@@ -5,7 +5,7 @@ using namespace std;
 //Varios clientes?
 int main()
 {
-    int montoAleatorio = 0;
+    int montoAleatorio = 0, nbd = 0;
     string i; // = "127.0.0.1";
     cout << "Ingrese la IP: ";
     cin >> i;
@@ -19,9 +19,14 @@ int main()
     montoAleatorio = ( rand() % 9 ) + 1;
     num[0] = n;
     for (int j = 0; j < n; j++){
+        nbd += montoAleatorio;
         char *resServer = sol.doOperation(ip, 7200, 3, (char *)montoAleatorio);
         memcpy(&res, resServer, sizeof(res));
-        cout << "Suma = " << res << endl;
+        if( nbd != res ){
+            cout << "No coinciden las cantidades, sevidor me devolvió: " << res << " yo tengo registrado " << nbd << endl;
+            exit(1);
+        }
+        //cout << "Servidor dice que tengo = " << res << " pesos" << endl;
     }
     return 0;
 }
