@@ -5,7 +5,7 @@ using namespace std;
 //Varios clientes?
 int main()
 {
-    int nDepositos = 0;
+    int montoAleatorio = 0;
     string i; // = "127.0.0.1";
     cout << "Ingrese la IP: ";
     cin >> i;
@@ -16,10 +16,10 @@ int main()
     srand( time( nullptr ) );
     //cout << "Ingrese el numero de ciclos: ";
     cin >> n;
-    nDepositos = ( rand() % 9 ) + 1;
+    montoAleatorio = ( rand() % 9 ) + 1;
     num[0] = n;
-    for (int j = 0; j < nDepositos; j++){
-        char *resServer = sol.doOperation(ip, 7200, 3, (char *)num);
+    for (int j = 0; j < n; j++){
+        char *resServer = sol.doOperation(ip, 7200, 3, (char *)montoAleatorio);
         memcpy(&res, resServer, sizeof(res));
         cout << "Suma = " << res << endl;
     }
