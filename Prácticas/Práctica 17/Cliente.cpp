@@ -1,8 +1,11 @@
 #include "Solicitud.h"
 #include <bits/stdc++.h>
+#include <time.h>
 using namespace std;
+//Varios clientes?
 int main()
 {
+    int nDepositos = 0;
     string i; // = "127.0.0.1";
     cout << "Ingrese la IP: ";
     cin >> i;
@@ -10,12 +13,12 @@ int main()
     strcpy(ip, i.c_str());
     Solicitud sol;
     int num[2], res, n;
-    cout << "Ingrese el numero de ciclos: ";
+    srand( time( nullptr ) );
+    //cout << "Ingrese el numero de ciclos: ";
     cin >> n;
-    num[0] = 125;
-    num[1] = 32;
-    for (int j = 0; j < n; j++)
-    {
+    nDepositos = ( rand() % 9 ) + 1;
+    num[0] = n;
+    for (int j = 0; j < nDepositos; j++){
         char *resServer = sol.doOperation(ip, 7200, 3, (char *)num);
         memcpy(&res, resServer, sizeof(res));
         cout << "Suma = " << res << endl;

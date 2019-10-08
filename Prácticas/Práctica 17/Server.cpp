@@ -6,13 +6,14 @@ int main()
     Respuesta server(7200);
     struct mensaje *request;
     unsigned int num[2], sum;
+    int nbd = 0;
     while (1)
     {
         request = server.getRequest();
         memcpy(num, (*request).arguments, sizeof(num));
-        sum = num[0] + num[1];
-        cout << num[0] << " + " << num[1] << " = " << sum << endl;
-        server.sendReply((char *)&sum);
+        nbd = num[0];
+        //cout << num[0] << " + " << num[1] << " = " << sum << endl;
+        server.sendReply((char *)&nbd);
     }
 
     return 0;
