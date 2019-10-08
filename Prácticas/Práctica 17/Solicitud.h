@@ -9,4 +9,5 @@ public:
 private:
     SocketDatagrama *socketlocal;
     struct mensaje response;
+    static int requestID;
 };

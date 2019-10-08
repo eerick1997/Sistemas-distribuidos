@@ -1,4 +1,6 @@
 #include "Respuesta.h"
+
+int Respuesta::requestIDR = 0;
 Respuesta::Respuesta(int port)
 {
     socketlocal = new SocketDatagrama(port);
@@ -11,16 +13,21 @@ struct mensaje *Respuesta::getRequest(void)
     socketlocal->recibe(paq);
     memcpy(clientePaqueteDatagrama, &paq, sizeof(paq));
     memcpy(&petition, clientePaqueteDatagrama->obtieneDatos(), clientePaqueteDatagrama->obtieneLongitud());
+    requestIDO = petition.requestId;
     return &petition;
 }
 
 void Respuesta::sendReply(char *respuesta)
 {
-    mensaje response = {.messageType = 0, .requestId = 3, .operationId = suma};
-    memcpy(response.arguments, respuesta, sizeof(respuesta));
-    PaqueteDatagrama paqueteDatagrama(sizeof(struct mensaje));
-    paqueteDatagrama.inicializaDatos((char *)&response);
-    paqueteDatagrama.inicializaIp(clientePaqueteDatagrama->obtieneDireccion());
-    paqueteDatagrama.inicializaPuerto(clientePaqueteDatagrama->obtienePuerto());
-    socketlocal->envia(paqueteDatagrama);
+    if (requestIDO == requestIDR)
+    {
+        mensaje response = {.messageType = 0, .requestId = requestIDO, .operationId = suma};
+        memcpy(response.arguments, respuesta, sizeof(respuesta));
+        PaqueteDatagrama paqueteDatagrama(sizeof(struct mensaje));
+        paqueteDatagrama.inicializaDatos((char *)&response);
+        paqueteDatagrama.inicializaIp(clientePaqueteDatagrama->obtieneDireccion());
+        paqueteDatagrama.inicializaPuerto(clientePaqueteDatagrama->obtienePuerto());
+        socketlocal->envia(paqueteDatagrama);
+        requestIDR++;
+    }
 }

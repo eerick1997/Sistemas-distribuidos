@@ -11,4 +11,6 @@ private:
     SocketDatagrama *socketlocal;
     PaqueteDatagrama *clientePaqueteDatagrama;
     struct mensaje petition;
+    static int requestIDR;
+    int requestIDO;
 };

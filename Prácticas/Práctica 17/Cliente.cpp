@@ -13,18 +13,21 @@ int main()
     strcpy(ip, i.c_str());
     Solicitud sol;
     int num[2], res, n;
-    srand( time( nullptr ) );
+    srand(time(nullptr));
     //cout << "Ingrese el numero de ciclos: ";
     cin >> n;
-    montoAleatorio = ( rand() % 9 ) + 1;
+    montoAleatorio = (rand() % 9) + 1;
     num[0] = n;
-    for (int j = 0; j < n; j++){
+    for (int j = 0; j < n; j++)
+    {
         nbd += montoAleatorio;
-        char *resServer = sol.doOperation(ip, 7200, 3, (char *)montoAleatorio);
+        char *resServer = sol.doOperation(ip, 7200, 3, (char *)&montoAleatorio);
         memcpy(&res, resServer, sizeof(res));
-        if( nbd != res ){
+        //printf("%d | %d\n", nbd, res);
+        if (nbd != res)
+        {
             cout << "No coinciden las cantidades, sevidor me devolvió: " << res << " yo tengo registrado " << nbd << endl;
-            exit(1);
+            exit(0);
         }
         //cout << "Servidor dice que tengo = " << res << " pesos" << endl;
     }

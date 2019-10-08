@@ -1,6 +1,8 @@
 #include "Solicitud.h"
 #include <sys/time.h>
 
+int Solicitud::requestID = 0;
+
 Solicitud::Solicitud()
 {
     socketlocal = new SocketDatagrama(0);
@@ -14,7 +16,7 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
 
     struct mensaje datos;
     datos.messageType = 1123456;
-    datos.requestId = 3343;
+    datos.requestId = requestID;
     datos.operationId = suma;
     memcpy(datos.arguments, arguments, sizeof(arguments));
     PaqueteDatagrama paq((char *)&datos, sizeof(datos), IP, puerto);
@@ -26,7 +28,10 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
         socketlocal->envia(paq);
         result = socketlocal->recibeTimeout(paq, segundos, microsegundos);
         if (result > 0)
+        {
+            requestID++;
             break;
+        }
     }
     if (n < 0)
     {
