@@ -21,6 +21,7 @@ int main()
     for (int j = 0; j < n; j++)
     {
         nbd += montoAleatorio;
+        cout << nbd << endl;
         char *resServer = sol.doOperation(ip, 7200, 3, (char *)&montoAleatorio);
         memcpy(&res, resServer, sizeof(res));
         //printf("%d | %d\n", nbd, res);

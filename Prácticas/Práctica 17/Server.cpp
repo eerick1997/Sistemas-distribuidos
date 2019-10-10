@@ -11,8 +11,9 @@ int main()
     {
         request = server.getRequest();
         memcpy(num, (*request).arguments, sizeof(num));
-        nbd = num[0];
+        nbd += num[0];
         //cout << num[0] << " + " << num[1] << " = " << sum << endl;
+        //cout << nbd << endl;
         server.sendReply((char *)&nbd);
     }
 

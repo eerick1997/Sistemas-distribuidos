@@ -9,6 +9,7 @@ Respuesta::Respuesta(int port)
 
 struct mensaje *Respuesta::getRequest(void)
 {
+    printf("requestIDO: %d | requestId: %d \n", requestIDO, petition.requestId);
     PaqueteDatagrama paq(sizeof(struct mensaje));
     socketlocal->recibe(paq);
     memcpy(clientePaqueteDatagrama, &paq, sizeof(paq));
