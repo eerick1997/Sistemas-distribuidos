@@ -10,11 +10,13 @@ int main()
     while (1)
     {
         request = server.getRequest();
-        memcpy(num, (*request).arguments, sizeof(num));
-        nbd += num[0];
-        //cout << num[0] << " + " << num[1] << " = " << sum << endl;
-        //cout << nbd << endl;
-        server.sendReply((char *)&nbd);
+        if( request != NULL ){
+            memcpy(num, (*request).arguments, sizeof(num));
+            nbd += num[0];
+            //cout << num[0] << " + " << num[1] << " = " << sum << endl;
+            //cout << nbd << endl;
+            server.sendReply((char *)&nbd);
+        }
     }
 
     return 0;
