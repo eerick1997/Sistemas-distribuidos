@@ -11,7 +11,7 @@ Solicitud::Solicitud()
 char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *arguments)
 {
     short n = 7;
-    time_t segundos = 0;
+    time_t segundos = 2;
     suseconds_t microsegundos = 500000;
 
     struct mensaje datos;
@@ -29,8 +29,35 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
         result = socketlocal->recibeTimeout(paq, segundos, microsegundos);
         if (result > 0)
         {
-            requestID++;
-            break;
+            memcpy(&response, paq.obtieneDatos(), paq.obtieneLongitud());
+            if (response.messageType == REPETIDO)
+            {
+
+                printf("REPETIDO\n");
+                printf("R  %d , O %d \n", response.requestId, requestID);
+                if (response.requestId != requestID)
+                {
+                    result = socketlocal->recibeTimeout(paq, segundos, microsegundos);
+                    memcpy(&response, paq.obtieneDatos(), paq.obtieneLongitud());
+                    lastResponse = response;
+                    requestID++;
+                }
+                else
+                {
+                    requestID++;
+                    break;
+                }
+            }
+            else
+            {
+                lastResponse = response;
+                requestID++;
+                break;
+            }
+        }
+        else
+        {
+            printf("NO llego nada, %d \n", requestID);
         }
     }
     if (n < 0)
@@ -38,7 +65,6 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
         printf("Servidor no disponible\n");
         exit(0);
     }
-    memcpy(&response, paq.obtieneDatos(), paq.obtieneLongitud());
 
     return response.arguments;
 }

@@ -7,6 +7,7 @@ public:
     char *doOperation(char *IP, int puerto, int operationId, char *arguments);
 
 private:
+    mensaje lastResponse;
     SocketDatagrama *socketlocal;
     struct mensaje response;
     static int requestID;

@@ -16,14 +16,15 @@ int main()
     srand(time(nullptr));
     //cout << "Ingrese el numero de ciclos: ";
     cin >> n;
-    montoAleatorio = (rand() % 9) + 1;
     num[0] = n;
     for (int j = 0; j < n; j++)
     {
-        nbd += montoAleatorio;
-        cout << nbd << endl;
+        montoAleatorio = (rand() % 9) + 1;
+        cout << montoAleatorio << endl;
         char *resServer = sol.doOperation(ip, 7200, 3, (char *)&montoAleatorio);
         memcpy(&res, resServer, sizeof(res));
+        nbd += montoAleatorio;
+        cout << nbd << "||" << res << endl;
         //printf("%d | %d\n", nbd, res);
         if (nbd != res)
         {
