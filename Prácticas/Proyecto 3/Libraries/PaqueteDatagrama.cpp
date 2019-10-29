@@ -2,7 +2,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-PaqueteDatagrama::PaqueteDatagrama(char *Datos, unsigned int Longitud, char *dirIP, int Puerto){
+PaqueteDatagrama::PaqueteDatagrama(char *Datos, unsigned int Longitud, char *dirIP, int Puerto)
+{
     longitud = Longitud;
     datos = new char[longitud];
     memcpy(datos, Datos, longitud);

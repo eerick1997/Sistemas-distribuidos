@@ -5,23 +5,19 @@
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <sys/time.h>
-#include <unistd.h> // for close
-class SocketMulticast
+
+class SocketDatagrama
 {
 public:
-    SocketMulticast(int);
-    ~SocketMulticast();
+    SocketDatagrama(int);
+    ~SocketDatagrama();
     int recibe(PaqueteDatagrama &p);
+    int envia(PaqueteDatagrama &p);
     int recibeTimeout(PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
-    int envia(PaqueteDatagrama &p, int TTL);
-    //Se une a un grupo multicast, recibe la IP multicast
-    void unirseGrupo(char *);
-    //Se sale de un grupo multicast, recibe la IP multicast
-    void salirseGrupo(char *);
 
 private:
-    int s; //ID socket
     struct sockaddr_in direccionLocal;
     struct sockaddr_in direccionForanea;
     timeval timeout;
+    int s;
 };

@@ -13,6 +13,7 @@ struct mensaje *Respuesta::getRequest(void)
     socketlocal->recibe(paq);
     memcpy(clientePaqueteDatagrama, &paq, sizeof(paq));
     memcpy(&petition, clientePaqueteDatagrama->obtieneDatos(), clientePaqueteDatagrama->obtieneLongitud());
+    printf("%d | %d \n", petition.requestId, requestIDO);
     if( petition.requestId != requestIDO )
         requestIDO = petition.requestId;
     else {
@@ -22,11 +23,11 @@ struct mensaje *Respuesta::getRequest(void)
     return &petition;
 }
 
-void Respuesta::sendReply(char *respuesta)
+void Respuesta::sendReply(char *respuesta, int type)
 {
     //if (requestIDO == requestIDR)
     //{
-        mensaje response = {.messageType = 0, .requestId = requestIDO, .operationId = suma};
+        mensaje response = {.messageType = type, .requestId = requestIDO, .operationId = suma};
         memcpy(response.arguments, respuesta, sizeof(respuesta));
         PaqueteDatagrama paqueteDatagrama(sizeof(struct mensaje));
         paqueteDatagrama.inicializaDatos((char *)&response);
