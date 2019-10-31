@@ -5,7 +5,7 @@ int main()
 {
     SocketMulticast sm( 0 );
     struct mensaje *request;
-    unsigned int num[2];
+    int num[ 2 ];
     string IP;
     int nbd = 0;
     while (1){
@@ -13,7 +13,8 @@ int main()
         cin >> num[ 0 ] >> num [ 1 ];
         char *ip = new char[ IP.size() ];
         strcpy( ip, IP.c_str() );
-        PaqueteDatagrama p( (char *)&num, (unsigned int)sizeof( num ), ip, 7200 );
+        cout << ip << endl;
+        PaqueteDatagrama p( (char *)num, sizeof( num ), ip, 7200 );
         //cout << "PaqueteDatagrama" << endl;
         sm.envia( p, 2 );
     }

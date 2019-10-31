@@ -1,15 +1,25 @@
 #include "SocketMuilticast.h"
+#include <iostream>
 
-SocketMulticast::SocketMulticast(int port)
-{
-    if (s = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP) < 0){
+using namespace std;
+
+SocketMulticast::SocketMulticast(int port){
+
+    s = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);
+    cout << s << endl;
+    int reuse = 1;
+
+    if (setsockopt(s, SOL_SOCKET, SO_REUSEPORT, &reuse, sizeof(reuse)) == -1) {
         perror("Error al inicializar socket");
         exit(0);
     }
+    bzero((char *)&direccionLocal, sizeof(direccionLocal));
     direccionLocal.sin_family = AF_INET;
     direccionLocal.sin_addr.s_addr = INADDR_ANY;
-    direccionLocal.sin_port = htons(port);
-    bind(s, (struct sockaddr *)&direccionLocal, sizeof(direccionLocal));
+    direccionLocal.sin_port = htons( port );
+    auto n = bind(s, (struct sockaddr *)&direccionLocal, sizeof(direccionLocal));
+    bzero((char *)&direccionForanea, sizeof(direccionForanea));
+    cout << n << endl;
 }
 
 void SocketMulticast::unirseGrupo(char *IP){
@@ -29,20 +39,20 @@ void SocketMulticast::salirseGrupo(char *IP)
 
 int SocketMulticast::envia(PaqueteDatagrama &p, int TTL){   
     int A = setsockopt(s, IPPROTO_IP, IP_MULTICAST_TTL, &TTL, sizeof(TTL));
-    printf("%d", A);
+    cout << A << endl;
     if (A > 0){
         bzero((char *)&direccionForanea, sizeof(direccionForanea));
         direccionForanea.sin_family = AF_INET;
         direccionForanea.sin_addr.s_addr = inet_addr(p.obtieneDireccion());
         direccionForanea.sin_port = htons(p.obtienePuerto());
         int tam = sendto(s, (char *)p.obtieneDatos(), p.obtieneLongitud() * sizeof(char), 0, (struct sockaddr *)&direccionForanea, sizeof(direccionForanea));
+        cout << tam << endl;
         return tam;
     }
     return A;
 }
 
-int SocketMulticast::recibe(PaqueteDatagrama &p)
-{
+int SocketMulticast::recibe(PaqueteDatagrama &p){
     char datos[p.obtieneLongitud()];
     bzero((char *)&direccionForanea, sizeof(direccionForanea));
     socklen_t direccionForaneaLen = sizeof(direccionForanea);
