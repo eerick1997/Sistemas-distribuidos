@@ -3,7 +3,7 @@
 #include "SocketDatagrama.h"
 class Respuesta{
 public:
-    Respuesta(int port);
+    Respuesta(int port, const char * );
     struct mensaje *getRequest(void);
     char *obtenerDireccion(void);
     void sendReply(char *respuesta, int type);
@@ -12,6 +12,5 @@ private:
     SocketDatagrama *socketlocal;
     PaqueteDatagrama *clientePaqueteDatagrama;
     struct mensaje petition;
-    static int requestIDR;
-    int requestIDO;
+    unsigned int requestIDO;
 };

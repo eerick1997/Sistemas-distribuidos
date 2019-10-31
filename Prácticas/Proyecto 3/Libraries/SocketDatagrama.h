@@ -6,10 +6,10 @@
 #include <arpa/inet.h>
 #include <sys/time.h>
 
-class SocketDatagrama
-{
+class SocketDatagrama {
 public:
-    SocketDatagrama(int);
+    SocketDatagrama( int );
+    SocketDatagrama( int, const char * );
     ~SocketDatagrama();
     int recibe(PaqueteDatagrama &p);
     int envia(PaqueteDatagrama &p);

@@ -16,9 +16,9 @@ void buildFile( char *nme_image ){
         }
     }
     out.close();
-}
+} 
 
-int main(){
+int main() {
     Respuesta server( 7200 );
     struct mensaje *request;
     int info[ TAM_MAX_ARG ];
