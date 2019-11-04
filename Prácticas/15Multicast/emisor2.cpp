@@ -14,7 +14,6 @@ int main() {
 	SocketMulticast s(puerto);
 	PaqueteDatagrama a((char *)datos, 2 * sizeof(int), "224.0.0.1", puerto);
 	while(s.envia(a, ttl) > 0) {
-		
 		char result[sizeof(int)];
 		int num[1];
 		PaqueteDatagrama d(sizeof(int));
