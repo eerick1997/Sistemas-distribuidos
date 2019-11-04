@@ -1,13 +1,14 @@
-#include "PaqueteDatagrama.h"
 #include <bits/stdc++.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <sys/time.h>
+#include "PaqueteDatagrama.h"
 
-class SocketDatagrama
-{
+#ifndef  _SOCKETDATAGRAMA_
+#define _SOCKETDATAGRAMA_
+class SocketDatagrama{
 public:
     SocketDatagrama(int);
     ~SocketDatagrama();
@@ -21,3 +22,4 @@ private:
     timeval timeout;
     int s;
 };
+#endif

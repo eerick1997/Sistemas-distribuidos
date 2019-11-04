@@ -1,3 +1,5 @@
+#ifndef  _PAQUETEDATAGRAMA_
+#define _PAQUETEDATAGRAMA_
 class PaqueteDatagrama
 {
 public:
@@ -18,3 +20,4 @@ private:
     unsigned int longitud;
     int puerto;
 };
+#endif

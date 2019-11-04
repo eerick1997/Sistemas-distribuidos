@@ -1,10 +1,16 @@
 #include "SocketDatagrama.h"
+#include "PaqueteDatagrama.h"
+#include <sys/types.h>
 #include <sys/socket.h>
-#include <bits/stdc++.h>
-#include <netinet/in.h>
 #include <arpa/inet.h>
+#include <stdio.h>
+#include <netinet/in.h>
 #include <netdb.h>
-#include <unistd.h> // for close
+#include <strings.h>
+#include <unistd.h>
+#include <iostream>
+#include <cstring>
+#include <bits/stdc++.h>
 
 SocketDatagrama::SocketDatagrama(int port)
 {
@@ -74,7 +80,6 @@ int SocketDatagrama::recibeTimeout(PaqueteDatagrama &p, time_t segundos, susecon
     return n;
 }
 
-SocketDatagrama::~SocketDatagrama()
-{
+SocketDatagrama::~SocketDatagrama(){
     close(s);
 }

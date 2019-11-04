@@ -1,11 +1,12 @@
-#include "PaqueteDatagrama.h"
 #include <bits/stdc++.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <sys/time.h>
-#include <unistd.h> // for close
+#include "PaqueteDatagrama.h"
+#ifndef  _SOCKETMULTICAST_
+#define _SOCKETMULTICAST_
 class SocketMulticast
 {
 public:
@@ -25,3 +26,4 @@ private:
     struct sockaddr_in direccionForanea;
     timeval timeout;
 };
+#endif

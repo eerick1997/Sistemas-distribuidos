@@ -1,5 +1,17 @@
 #include "SocketMuilticast.h"
+#include "PaqueteDatagrama.h"
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <strings.h>
+#include <unistd.h>
 #include <iostream>
+#include <cstring>
+#include <time.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -19,7 +31,6 @@ SocketMulticast::SocketMulticast(int port){
     direccionLocal.sin_port = htons( port );
     auto n = bind(s, (struct sockaddr *)&direccionLocal, sizeof(direccionLocal));
     bzero((char *)&direccionForanea, sizeof(direccionForanea));
-    cout << n << endl;
 }
 
 void SocketMulticast::unirseGrupo(char *IP){
