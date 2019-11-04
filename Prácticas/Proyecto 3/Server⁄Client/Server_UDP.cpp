@@ -11,7 +11,9 @@ int main() {
     int packet[ TAM_MAX_ARG ];
     char command[ TAM_MAX_ARG ]; 
     struct mensaje *request;
+    cout << "IP: ";
     cin >> ip;
+    cout << endl;
     IP = new char[ ip.length() ];
     strcpy( IP, ip.c_str() );
     Respuesta server( 7200, IP );   
@@ -30,22 +32,16 @@ int main() {
                     bytes.push_back( in.get() );
             
             int number_packets = ceil( ( ( float )bytes.size() / (float)TAM_MAX_ARG ) );
-            cout << number_packets << endl;
             server.sendReply( (char *)&number_packets, number_packets );
-
             for( int npacket = 0, index = 0; npacket < number_packets; npacket++ ){
                 cout << endl << npacket << endl << endl;
                 for( int i = 0; i < TAM_MAX_ARG; i++ ){
-
                     packet[ i ] = bytes[ index ];
-                    cout << packet[ i ] << " ";
-
                     index++;
                     if( index == bytes.size() )
                         break;
                 }
                 server.sendReply( (char *)packet, npacket );
-                cout << endl;
             }  
             remove( name_image );
             in.close();

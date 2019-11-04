@@ -37,18 +37,12 @@ void SocketMulticast::salirseGrupo(char *IP){
 }
 
 int SocketMulticast::envia(PaqueteDatagrama &p, int TTL){   
-    int A = setsockopt(s, IPPROTO_IP, IP_MULTICAST_TTL, &TTL, sizeof(TTL));
-    cout << A << endl;
-    if (A > 0){
-        bzero((char *)&direccionForanea, sizeof(direccionForanea));
-        direccionForanea.sin_family = PF_INET;
-        direccionForanea.sin_addr.s_addr = inet_addr(p.obtieneDireccion());
-        direccionForanea.sin_port = htons(p.obtienePuerto());
-        int tam = sendto(s, (char *)p.obtieneDatos(), p.obtieneLongitud() * sizeof(char), 0, (struct sockaddr *)&direccionForanea, sizeof(direccionForanea));
-        cout << tam << endl;
-        return tam;
-    }
-    return A;
+    setsockopt(s, IPPROTO_IP, IP_MULTICAST_TTL, &TTL, sizeof(TTL));
+    bzero((char *)&direccionForanea, sizeof(direccionForanea));
+    direccionForanea.sin_family = PF_INET;
+    direccionForanea.sin_addr.s_addr = inet_addr(p.obtieneDireccion());
+    direccionForanea.sin_port = htons(p.obtienePuerto());
+    return sendto(s, (char *)p.obtieneDatos(), p.obtieneLongitud() * sizeof(char), 0, (struct sockaddr *)&direccionForanea, sizeof(direccionForanea));
 }
 
 int SocketMulticast::recibe(PaqueteDatagrama &p){

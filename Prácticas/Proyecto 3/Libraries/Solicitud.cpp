@@ -12,8 +12,8 @@ Solicitud::Solicitud() {
 }
 
 vector< int > Solicitud::doOperation( char *IP, int puerto, int operationId, char *arguments ) {
-    int8_t n = 7;
-    int64_t packets = 0;
+    int n = 7;
+    int packets = 0;
     time_t segundos = 2;
     suseconds_t microsegundos = 500000;
     vector< int > image;
@@ -28,12 +28,12 @@ vector< int > Solicitud::doOperation( char *IP, int puerto, int operationId, cha
     PaqueteDatagrama paq( (char *)&datos, sizeof( struct mensaje ), IP, puerto );
     PaqueteDatagrama paq2( sizeof( struct mensaje ) );
 
-    int8_t result = -1;
-    while ( (n--) > 0 && result < 0 ) {
+    int result = -1;
+    while ( (n--) > 0 && result == -1 ) {
         socketlocal -> envia( paq );
         result = socketlocal -> recibeTimeout( paq2, segundos, microsegundos );
     }
-    if ( n < 0 ) {
+    if ( result == -1 ) {
         printf("Servidor no disponible\n");
         return {};
     }
@@ -50,11 +50,12 @@ vector< int > Solicitud::doOperation( char *IP, int puerto, int operationId, cha
         cout << endl << i << " #" << response.messageType << endl << endl;
         for( int byte = 0; byte < TAM_MAX_ARG; byte++ ){
             
-            cout << packet[ byte ] << " ";
-            if( packet[ byte ] == -1 ){ 
-                return image;
-            }
-            image.push_back( packet[ byte ] );
+            //cout << packet[ byte ] << " ";
+            if( packet[ byte ] != -1 )
+                image.push_back( packet[ byte ] );
+            else 
+                break;
+            
         }
         cout << endl;
     }
