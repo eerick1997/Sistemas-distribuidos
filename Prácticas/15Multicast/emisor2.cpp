@@ -13,12 +13,11 @@ int main() {
 	puerto = 7200; ttl = 1;
 	SocketMulticast s(puerto);
 	PaqueteDatagrama a((char *)datos, 2 * sizeof(int), "224.0.0.1", puerto);
+	SocketDatagrama c(8080);
+	PaqueteDatagrama d(sizeof(int));
 	while(s.envia(a, ttl) > 0) {
 		char result[sizeof(int)];
 		int num[1];
-		PaqueteDatagrama d(sizeof(int));
-		SocketDatagrama c(8080);
-
 		int n = c.recibe(d);
 		memcpy(num, d.obtieneDatos(), sizeof(int));
 		printf("Result %d \n",num[0]);

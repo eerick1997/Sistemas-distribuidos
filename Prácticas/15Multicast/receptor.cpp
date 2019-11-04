@@ -7,14 +7,11 @@ using namespace std;
 
 int main(){
 
-	//char* ip_multicast;
 	int puerto;
 	int recibe;
 	int numeros[2];
 
 	PaqueteDatagrama p(sizeof(int)*4);
-
-	//cin >> puerto;
 
 	SocketMulticast socket_multicast(7200);
 
@@ -22,8 +19,8 @@ int main(){
 
 	recibe= socket_multicast.recibe(p);
 	memcpy(numeros, p.obtieneDatos(), sizeof(int)*2);
-
-	cout << numeros[ 0 ] << " | " << numeros[ 1 ];
+	cout << endl;
+	cout << numeros[ 0 ] << " | " << numeros[ 1 ] << endl;
 
 	int resp= numeros[0]+numeros[1];
 
