@@ -1,35 +1,30 @@
-#include <bits/stdc++.h>
 #include "SocketMuilticast.h"
 #include "SocketDatagrama.h"
 #include "PaqueteDatagrama.h"
 #include <time.h>
+#include <iostream>
 
 using namespace std;
 
+const int portMulticast = 7200;
+const int portDatagram = 8080;
+const int TTL = 2;
+char* IP = "224.0.0.1";
+
 //Receptor
-int main()
-{
-    SocketMulticast socketMulticast( 7200 );
-    SocketDatagrama socketDatagrama( 8080 );
-    int result = 0;
-    string i;
-    cout << "Ingrese la IP: ";
-    //224.0.0.1
-    cout << "IP group: ";
-    cin >> i;
-    cout << endl;
-    char *ip = new char[i.length()];
-    strcpy(ip, i.c_str());
-    int num[2];
-    srand(time(nullptr));
-    PaqueteDatagrama paqueteServer( sizeof( num ) );
-    socketMulticast.unirseGrupo( ip );        
-    socketMulticast.recibe( paqueteServer );
-    memcpy(num, paqueteServer.obtieneDatos(), sizeof(num));
-    cout << num[ 0 ] << " | " << num[ 1 ] << endl;         
-    cout << num[ 0 ] + num[ 1 ] << endl;
-    result = num[ 0 ] + num[ 1 ];
-    PaqueteDatagrama paquete(  (char*)&result, sizeof( int ), paqueteServer.obtieneDireccion(), 7200 );
-    socketDatagrama.envia( paquete );
+int main() {
+    int numbers[ 2 ], result[ 1 ];
+    PaqueteDatagrama datagramPacketMulticast( sizeof( int ) * 4 );
+    SocketMulticast multicastSocket( portMulticast );
+    SocketDatagrama datagramSocket( portDatagram );
+    multicastSocket.unirseGrupo( IP );
+    multicastSocket.recibe( datagramPacketMulticast );
+    memcpy( numbers, datagramPacketMulticast.obtieneDatos(), sizeof( numbers ) );
+    cout << numbers[ 0 ] << " | " << numbers[ 1 ] << endl;
+    result[ 0 ] = numbers[ 0 ] + numbers[ 1 ];
+    cout << "My IP address is: " << datagramPacketMulticast.obtieneDireccion() << endl;
+    PaqueteDatagrama datagramPacketSend( (char *)result, sizeof( result ), datagramPacketMulticast.obtieneDireccion(), portDatagram );
+    cout << datagramSocket.envia( datagramPacketSend ) << endl;
+    multicastSocket.salirseGrupo( IP );
     return 0;
 }

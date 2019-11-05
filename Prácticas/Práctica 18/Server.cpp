@@ -5,31 +5,23 @@
 
 using namespace std;
 
+const int portMulticast = 7200;
+const int portDatagram = 8080;
+const int TTL = 1;
+char* IP = "224.0.0.1";
 //Emisor
-int main(){
-    SocketMulticast sm( 0 );
-    SocketDatagrama socketDatagrama( 8080 );
-    struct mensaje *request;
-    int num[ 2 ];
-    int result = 0;
-    string IP;
-    int nbd = 0;
-    cout << "Type IP: ";
-    cin >> IP;
-    cout << endl;
-    while ( true ) {
-        cout << "Type two numbers: ";
-        cin >> num[ 0 ] >> num [ 1 ];
-        cout << endl;
-        char *ip = new char[ IP.size() ];
-        strcpy( ip, IP.c_str() );
-        cout << ip << endl;
-        PaqueteDatagrama p( (char *)num, sizeof( num ), ip, 7200 );
-        PaqueteDatagrama p2( sizeof( int ) );
-        sm.envia( p, 2 );
-        socketDatagrama.recibe( p2 );
-        memcpy( &result, p2.obtieneDatos(), sizeof( int ) );
-        cout << "result = " << result << endl;
+int main() {
+    int numbers[ 2 ] = {4, 5};
+    SocketMulticast socketMulticast( portMulticast );
+    PaqueteDatagrama datagramPacketMulticast( (char *)numbers, sizeof( numbers ), IP, portMulticast  );
+    SocketDatagrama socketDatagrama( portDatagram );
+    PaqueteDatagrama datagramPacketDatagram( sizeof( int ) ), 
+    datagramPacketResult( sizeof( int ) );
+    while( socketMulticast.envia( datagramPacketMulticast, TTL ) > 0 ) {
+        int result[ 1 ];
+        cout << socketDatagrama.recibe( datagramPacketResult ) << endl;
+        memcpy( result, datagramPacketResult.obtieneDatos(), sizeof( result ) );
+        cout << "The sum is: " << result[ 0 ] << endl;
     }
     return 0;
 }

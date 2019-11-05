@@ -40,7 +40,7 @@ void send_request_ss( int quality, int time ) {
 int main(){
     int quality, time;
     cin >> quality >> time;
-    get_ip_range( "127.0.0." );
+    get_ip_range( "10.100.69.12" );
     mkdir( "Images", 0700 );
     while( true ){
         send_request_ss( quality, time );
