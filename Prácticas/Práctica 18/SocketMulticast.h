@@ -5,7 +5,7 @@
 #include <arpa/inet.h>
 #include <sys/time.h>
 #include "PaqueteDatagrama.h"
-#ifndef  _SOCKETMULTICAST_
+#ifndef _SOCKETMULTICAST_
 #define _SOCKETMULTICAST_
 class SocketMulticast
 {
@@ -13,7 +13,6 @@ public:
     SocketMulticast(int);
     ~SocketMulticast();
     int recibe(PaqueteDatagrama &p);
-    int recibeTimeout(PaqueteDatagrama &p, time_t segundos, suseconds_t microsegundos);
     int envia(PaqueteDatagrama &p, int TTL);
     //Se une a un grupo multicast, recibe la IP multicast
     void unirseGrupo(char *);

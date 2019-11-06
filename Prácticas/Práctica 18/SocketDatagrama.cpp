@@ -36,16 +36,10 @@ int SocketDatagrama::recibe(PaqueteDatagrama &p)
 {
     socklen_t direccionForaneaLen = sizeof(direccionForanea);
     int tam = recvfrom(s, (char *)p.obtieneDatos(), p.obtieneLongitud() * sizeof(int), 0, (struct sockaddr *)&direccionForanea, &direccionForaneaLen);
-    cout << tam << endl;
     char ip[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &(direccionForanea.sin_addr.s_addr), ip, INET_ADDRSTRLEN);
-    for (int i = 0; i < INET_ADDRSTRLEN; i++)
-        cout << ip[i] << " ";
-    cout << endl;
     p.inicializaIp(ip);
     p.inicializaPuerto(ntohs(direccionForanea.sin_port));
-    cout << "Port: " << ntohs(direccionForanea.sin_port) << endl;
-
     return tam;
 }
 

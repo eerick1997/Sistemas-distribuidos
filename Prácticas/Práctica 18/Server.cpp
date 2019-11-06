@@ -1,15 +1,18 @@
-#include "SocketMuilticast.h"
+#include "SocketMulticast.h"
 #include "SocketDatagrama.h"
 #include "PaqueteDatagrama.h"
 #include <iostream>
+#include <unistd.h>
 #include <thread>
+#include <string.h>
 
 using namespace std;
 
 const int portMulticast = 7200;
 const int portDatagram = 8080;
 const int TTL = 1;
-char *IP = "224.0.0.1";
+string IPM = "224.0.0.1";
+char *IP = (char *)IPM.c_str();
 
 //Emisor
 
@@ -20,9 +23,10 @@ void UDPUnicast()
     PaqueteDatagrama datagramPacketResult(sizeof(int));
     while (1)
     {
-        cout << socketDatagrama.recibe(datagramPacketResult) << endl;
+        socketDatagrama.recibe(datagramPacketResult);
+        cout << "Paquete recibido de: " << datagramPacketResult.obtieneDireccion() << ":" << datagramPacketResult.obtienePuerto() << endl;
         memcpy(&result, datagramPacketResult.obtieneDatos(), sizeof(result));
-        cout << "The sum is: " << result << endl;
+        cout << "La suma es: " << result << endl;
         fflush(stdout);
     }
 }
@@ -36,6 +40,7 @@ int main()
     while (1)
     {
         socketMulticast.envia(datagramPacketMulticast, TTL);
+        usleep(200);
     }
     return 0;
 }
