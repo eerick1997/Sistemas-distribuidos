@@ -1,0 +1,9 @@
+1.-
+    Considerando que el numero de carácteres a almacenar en total es de 35 por cada usuario
+    es necesario contar con un almacenamiento de 2 450 000 000 bytes lo cual es equivalente 
+    2.3 Gb aproximadamente. Esto indica que es posible guardarla la información en un disco
+    duro, una USB con almacenamiento mayor a 4 Gb, y en memoria virtual RAM es posible pero
+    la capacidad debe ser mayor a 8 Gb.
+
+2.- 
+    
