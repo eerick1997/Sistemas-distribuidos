@@ -113,7 +113,7 @@ vector< Coordenada > Gusano::mover() {
 		} else if(movimiento == CURVA){
 			
 			curvas = uniform_int_distribution<int>(1,5)( semilla );
-			radio = uniform_int_distribution<int>(10,150)( semilla );
+			radio = uniform_int_distribution<int>(10,150)( semilla );f
 			
 			for(int i = 0; i < curvas; i++){
 
