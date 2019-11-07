@@ -10,9 +10,9 @@ const int port = 7200;
 vector< string > IPrange; 
 
 
-void get_ip_range( string IP ) {
-    for( int i = 1; i < 2; i++ )
-        IPrange.push_back( IP + to_string( i ) );
+void get_ip_range( ) {
+    IPrange.push_back( "" );
+    IPrange.push_back( "" );
 }
 
 void send_request_ss( int quality, int time ) {
@@ -26,7 +26,7 @@ void send_request_ss( int quality, int time ) {
         strcpy( command, Command.c_str() );
         cout << ip << endl;
         cout << command << endl;
-        vector< int  > image = request.doOperation( ip, port, 1, command );
+        vector< int > image = request.doOperation( ip, port, 1, command );
         if( image.size() > 0 ){
             ofstream out( "Images/" + IP + ".png", ios::binary );
             for( auto byte : image )   
@@ -40,7 +40,7 @@ void send_request_ss( int quality, int time ) {
 int main(){
     int quality, time;
     cin >> quality >> time;
-    get_ip_range( "10.100.69.12" );
+    get_ip_range( );
     mkdir( "Images", 0700 );
     while( true ){
         send_request_ss( quality, time );
