@@ -92,6 +92,7 @@ int SocketMulticast::enviaConfiable(PaqueteDatagrama &p, int TTL, int num_recept
         if (socketUni.recibeTimeout(pAux, 1, 50) > 0)
         {
             int numReceived;
+            memcpy(&numReceived, pAux.obtieneDatos(), sizeof(numReceived));
             if (numReceived == numMessage)
             {
                 verify += 1;
@@ -107,7 +108,7 @@ int SocketMulticast::enviaConfiable(PaqueteDatagrama &p, int TTL, int num_recept
         tam = -1;
     }
     socketUni.~SocketDatagrama();
-    pAux.~PaqueteDatagrama();
+    //pAux.~PaqueteDatagrama();
     return tam;
 }
 
@@ -122,11 +123,12 @@ int SocketMulticast::recibeConfiable(PaqueteDatagrama &p)
     p.inicializaIp(ip);
     p.inicializaPuerto(ntohs(direccionForanea.sin_port));
     p.inicializaDatos(MensajeNumerado.datos);
-    SocketDatagrama socketUni(8888);
+    SocketDatagrama socketUni(8889);
     PaqueteDatagrama pAux(sizeof(unsigned int));
     pAux.inicializaDatos((char *)&MensajeNumerado.messageId);
     pAux.inicializaIp(p.obtieneDireccion());
-    pAux.inicializaPuerto(p.obtienePuerto());
+    pAux.inicializaPuerto(8888);
+    socketUni.envia(pAux);
     if (numMessage == MensajeNumerado.messageId)
     {
         numMessage++;
@@ -136,7 +138,7 @@ int SocketMulticast::recibeConfiable(PaqueteDatagrama &p)
         tam = -1;
     }
     socketUni.~SocketDatagrama();
-    pAux.~PaqueteDatagrama();
+    //pAux.~PaqueteDatagrama();
     return tam;
 }
 

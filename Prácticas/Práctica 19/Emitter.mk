@@ -1,5 +1,5 @@
-Server: Server.cpp SocketMulticast.o SocketDatagrama.o PaqueteDatagrama.o
-	g++ Server.cpp SocketMulticast.o SocketDatagrama.o PaqueteDatagrama.o -o Server -pthread
+Emitter: Emitter.cpp SocketMulticast.o SocketDatagrama.o PaqueteDatagrama.o
+	g++ Emitter.cpp SocketMulticast.o SocketDatagrama.o PaqueteDatagrama.o -o Emitter.out
 SocketDatagrama.o: SocketDatagrama.cpp PaqueteDatagrama.o PaqueteDatagrama.h
 	g++ SocketDatagrama.cpp -c
 SocketMulticast.o: SocketMulticast.cpp PaqueteDatagrama.o SocketDatagrama.h
