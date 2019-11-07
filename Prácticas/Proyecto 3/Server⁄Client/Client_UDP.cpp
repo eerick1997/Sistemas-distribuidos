@@ -11,8 +11,8 @@ vector< string > IPrange;
 
 
 void get_ip_range( ) {
-    IPrange.push_back( "" );
-    IPrange.push_back( "" );
+    IPrange.push_back( "192.168.43.115" );
+    //IPrange.push_back( "" );
 }
 
 void send_request_ss( int quality, int time ) {
