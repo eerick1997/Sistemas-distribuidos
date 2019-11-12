@@ -17,7 +17,7 @@ int main() {
     IP = new char[ ip.length() ];
     strcpy( IP, ip.c_str() );
     Respuesta server( 7200, IP );   
-    while( true ) {
+    //while( true ) {
         request = server.getRequest();
         if( request != NULL ) {
             vector< int > bytes;
@@ -43,9 +43,9 @@ int main() {
                 }
                 server.sendReply( (char *)packet, npacket );
             }  
-            remove( name_image );
+            //remove( name_image );
             in.close();
         }
-    }
+    //}
     return 0;
 }

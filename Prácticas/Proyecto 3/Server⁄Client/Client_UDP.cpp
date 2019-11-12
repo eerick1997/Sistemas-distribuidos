@@ -11,7 +11,7 @@ vector< string > IPrange;
 
 
 void get_ip_range( ) {
-    IPrange.push_back( "192.168.43.115" );
+    IPrange.push_back( "127.0.0.1" );
     //IPrange.push_back( "" );
 }
 
@@ -21,7 +21,7 @@ void send_request_ss( int quality, int time ) {
     for( auto IP: IPrange ) {
         char *ip = new char[ IP.length() ];
         char *command = new char[ Command.length() ];
-        int32_t number_of_packets;
+        int number_of_packets;
         strcpy( ip, IP.c_str() );
         strcpy( command, Command.c_str() );
         cout << ip << endl;

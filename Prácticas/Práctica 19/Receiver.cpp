@@ -12,7 +12,7 @@ int main()
 {
     const int portMulticast = 7200;
     const int TTL = 2;
-    string IPM = "224.0.0.1";
+    string IPM = "224.2.2.1";
     char *IP = (char *)IPM.c_str();
     int nbd = 0, status;
     PaqueteDatagrama datagramPacketMulticast(sizeof(int));
