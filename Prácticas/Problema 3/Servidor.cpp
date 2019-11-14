@@ -49,8 +49,11 @@ int main(int32_t argc, char const *argv[])
                 write(1, timestamp, n);
                 write(1, "\n", strlen("\n"));
                 respuesta.sendReply((char *)&request->requestId, suma);
-            } else 
-                respuesta.sendReply( (char *)&request -> requestId, REPETIDO );
+            } else {
+                tiempo.tv_sec = 0; 
+                tiempo.tv_usec = 0;
+                respuesta.sendReply( (char *)&tiempo, REPETIDO );
+            }
             //cout << endl;
         }
         else
