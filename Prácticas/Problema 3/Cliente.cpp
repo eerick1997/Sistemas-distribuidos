@@ -10,7 +10,7 @@ using namespace std;
 int main(int32_t argc, char const *argv[])
 {
 
-    int32_t n;
+    int32_t n = 0;
     Solicitud solicitud;
     int32_t file_to_read, response;
     char data[34];
@@ -24,24 +24,30 @@ int main(int32_t argc, char const *argv[])
     if ((file_to_read = open(argv[1], O_RDONLY)) == -1)
         exit(-1);
 
-    for (int32_t i = 0; i < atoi(argv[4]); i++)
+    do
     {
-        read(file_to_read, data, 32);
-        //write(1, data, 32);
-        //write(1, "\n", 1);
-        char *response_server = solicitud.doOperation((char *)argv[3], atoi(argv[2]), i, data);
-        memcpy(&timestamp, response_server, sizeof(timestamp));
-        if (timestamp.tv_sec == 0 && timestamp.tv_usec == 0)
+        for (int32_t i = 0; i < atoi(argv[4]); i++)
         {
-            cout << "Ya tienes registrado un voto previo" << endl;
+            read(file_to_read, data, 32);
+            //write(1, data, 32);
+            //write(1, "\n", 1);
+            char *response_server = solicitud.doOperation((char *)argv[3], atoi(argv[2]), i, data);
+            memcpy(&timestamp, response_server, sizeof(timestamp));
+            if (timestamp.tv_sec == 0 && timestamp.tv_usec == 0)
+            {
+                cout << "Ya tienes registrado un voto previo" << endl;
+            }
+            else
+            {
+                cout << "Voto registrado" << endl;
+            }
         }
-        else
-        {
-            cout << "Voto registrado" << endl;
-        }
-    }
+        cout << "Presiona enter";
+        cin;
+        n++;
+    } while (n < 2)
 
-    close(file_to_read);
+        close(file_to_read);
 
     return 0;
 }
