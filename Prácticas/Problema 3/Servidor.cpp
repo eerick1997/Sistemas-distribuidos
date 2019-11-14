@@ -38,11 +38,12 @@ int main(int32_t argc, char const *argv[])
             int n = sprintf(timestamp, "%ld%ld", tiempo.tv_sec, tiempo.tv_usec);
             write(file_to_write, timestamp, n);
             write(file_to_write, "\n", strlen("\n"));
+            fsync(file_to_write);
             write(1, data, 31);
             write(1, timestamp, n);
             write(1, "\n", strlen("\n"));
             respuesta.sendReply((char *)&request->requestId, suma);
-            cout << endl;
+            //cout << endl;
         }
         else
         {
