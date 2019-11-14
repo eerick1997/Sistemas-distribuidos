@@ -18,7 +18,7 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
     datos.messageType = 1123456;
     datos.requestId = requestID;
     datos.operationId = suma;
-    memcpy(datos.arguments, arguments, 32 * sizeof( char ) );
+    memcpy(datos.arguments, arguments, 32 * sizeof(char));
     PaqueteDatagrama paq((char *)&datos, sizeof(datos), IP, puerto);
 
     int result = -1;
@@ -33,8 +33,8 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
             if (response.messageType == REPETIDO)
             {
 
-                printf("REPETIDO\n");
-                printf("R  %d , O %d \n", response.requestId, requestID);
+                //printf("REPETIDO\n");
+                //printf("R  %d , O %d \n", response.requestId, requestID);
                 if (response.requestId != requestID)
                 {
                     result = socketlocal->recibeTimeout(paq, segundos, microsegundos);
@@ -60,7 +60,7 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
             printf("NO llego nada, %d \n", requestID);
         }
     }
-    if ( result == -1 )
+    if (result == -1)
     {
         printf("Servidor no disponible\n");
         exit(0);
