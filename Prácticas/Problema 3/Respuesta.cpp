@@ -16,7 +16,7 @@ struct mensaje *Respuesta::getRequest(void)
     memcpy(&petition, clientePaqueteDatagrama->obtieneDatos(), clientePaqueteDatagrama->obtieneLongitud());
     //printf("%d | %d \n", petition.requestId, requestIDR);
     if (petition.requestId == requestIDR)
-        requestIDO = petition.requestId;
+        requestIDO = petition.requestId, requestIDR++;
     else
     {
         printf("Mensaje repetido\n");
@@ -36,6 +36,6 @@ void Respuesta::sendReply(char *respuesta, int type)
     paqueteDatagrama.inicializaIp(clientePaqueteDatagrama->obtieneDireccion());
     paqueteDatagrama.inicializaPuerto(clientePaqueteDatagrama->obtienePuerto());
     socketlocal->envia(paqueteDatagrama);
-    requestIDR++;
+    
     //}
 }
