@@ -24,27 +24,20 @@ int main(int32_t argc, char const *argv[])
     if ((file_to_read = open(argv[1], O_RDONLY)) == -1)
         exit(-1);
 
-    do
+    for (int32_t i = 0; i < atoi(argv[4]); i++)
     {
-        lseek(file_to_read, 0L, SEEK_SET);
-        for (int32_t i = 0; i < atoi(argv[4]); i++)
+        read(file_to_read, data, 32);
+        char *response_server = solicitud.doOperation((char *)argv[3], atoi(argv[2]), i, data);
+        memcpy(&timestamp, response_server, sizeof(timeval));
+        if (timestamp.tv_sec == 0 && timestamp.tv_usec == 0)
         {
-            read(file_to_read, data, 32);
-            //write(1, data, 32);
-            //write(1, "\n", 1);
-            char *response_server = solicitud.doOperation((char *)argv[3], atoi(argv[2]), i, data);
-            memcpy(&timestamp, response_server, sizeof(timestamp));
-            if (timestamp.tv_sec == 0 && timestamp.tv_usec == 0)
-            {
-                cout << "Ya tienes registrado un voto previo" << endl;
-            }
-            else
-            {
-                cout << "Voto registrado" << endl;
-            }
+            cout << "Ya tienes registrado un voto previo" << endl;
         }
-        n++;
-    } while (n < 2);
+        else
+        {
+            cout << timestamp.tv_sec << "|" << timestamp.tv_usec << endl;
+        }
+    }
 
     close(file_to_read);
 

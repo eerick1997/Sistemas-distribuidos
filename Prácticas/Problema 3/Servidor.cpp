@@ -9,8 +9,7 @@
 
 using namespace std;
 
-
-set< string > CURP;
+set<string> CURP;
 
 int main(int32_t argc, char const *argv[])
 {
@@ -19,6 +18,7 @@ int main(int32_t argc, char const *argv[])
     struct mensaje *request;
     int32_t file_to_write, a = 0;
     char data[34], timestamp[40];
+
     timeval tiempo;
     if (argc != 3)
     {
@@ -38,13 +38,14 @@ int main(int32_t argc, char const *argv[])
         {
             memcpy(data, (char *)request->arguments, 31);
             string numero = "";
-            for( int i = 0; i < 10; i++ ){
-                numero += data[ i ];
-                cout << numero << endl;
+            for (int i = 0; i < 10; i++)
+            {
+                numero += data[i];
             }
 
-            if( CURP.count( numero ) == 0 ) {
-                CURP.insert( numero );
+            if (CURP.count(numero) == 0)
+            {
+                CURP.insert(numero);
                 write(file_to_write, data, 31);
                 gettimeofday(&tiempo, NULL);
                 int n = sprintf(timestamp, "%ld%ld", tiempo.tv_sec, tiempo.tv_usec);
@@ -54,13 +55,13 @@ int main(int32_t argc, char const *argv[])
                 write(1, data, 31);
                 write(1, timestamp, n);
                 write(1, "\n", strlen("\n"));
-                respuesta.sendReply((char *)&tiempo, suma);
-            } else {
-                tiempo.tv_sec = 0; 
-                tiempo.tv_usec = 0;
-                respuesta.sendReply( (char *)&tiempo, REPETIDO );
             }
-            //cout << endl;
+            else
+            {
+                tiempo.tv_sec = 0;
+                tiempo.tv_usec = 0;
+            }
+            respuesta.sendReply((char *)&tiempo, suma);
         }
         else
         {
