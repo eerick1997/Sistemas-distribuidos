@@ -5,8 +5,12 @@
 #include <fcntl.h>
 #include <sys/time.h>
 #include <string.h>
+#include <algorithm>
 
 using namespace std;
+
+
+set< string > CURP;
 
 int main(int32_t argc, char const *argv[])
 {
@@ -33,16 +37,20 @@ int main(int32_t argc, char const *argv[])
         if (request != NULL)
         {
             memcpy(data, (char *)request->arguments, 31);
-            write(file_to_write, data, 31);
-            gettimeofday(&tiempo, NULL);
-            int n = sprintf(timestamp, "%ld%ld", tiempo.tv_sec, tiempo.tv_usec);
-            write(file_to_write, timestamp, n);
-            write(file_to_write, "\n", strlen("\n"));
-            fsync(file_to_write);
-            write(1, data, 31);
-            write(1, timestamp, n);
-            write(1, "\n", strlen("\n"));
-            respuesta.sendReply((char *)&request->requestId, suma);
+            if( CURP.count( data ) == 0 ) {
+                CURP.insert( data );
+                write(file_to_write, data, 31);
+                gettimeofday(&tiempo, NULL);
+                int n = sprintf(timestamp, "%ld%ld", tiempo.tv_sec, tiempo.tv_usec);
+                write(file_to_write, timestamp, n);
+                write(file_to_write, "\n", strlen("\n"));
+                fsync(file_to_write);
+                write(1, data, 31);
+                write(1, timestamp, n);
+                write(1, "\n", strlen("\n"));
+                respuesta.sendReply((char *)&request->requestId, suma);
+            } else 
+                respuesta.sendReply( (char *)&request -> requestId, REPETIDO );
             //cout << endl;
         }
         else
