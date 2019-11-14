@@ -26,6 +26,7 @@ int main(int32_t argc, char const *argv[])
 
     do
     {
+        lseek(file_to_read, 0L, SEEK_SET);
         for (int32_t i = 0; i < atoi(argv[4]); i++)
         {
             read(file_to_read, data, 32);
@@ -42,12 +43,10 @@ int main(int32_t argc, char const *argv[])
                 cout << "Voto registrado" << endl;
             }
         }
-        cout << "Presiona enter";
-        cin;
         n++;
-    } while (n < 2)
+    } while (n < 2);
 
-        close(file_to_read);
+    close(file_to_read);
 
     return 0;
 }

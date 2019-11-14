@@ -9,8 +9,7 @@
 
 using namespace std;
 
-
-set< string > CURP;
+set<string> CURP;
 
 int main(int32_t argc, char const *argv[])
 {
@@ -37,8 +36,9 @@ int main(int32_t argc, char const *argv[])
         if (request != NULL)
         {
             memcpy(data, (char *)request->arguments, 31);
-            if( CURP.count( data ) == 0 ) {
-                CURP.insert( data );
+            if (CURP.count(data) == 0)
+            {
+                CURP.insert(data);
                 write(file_to_write, data, 31);
                 gettimeofday(&tiempo, NULL);
                 int n = sprintf(timestamp, "%ld%ld", tiempo.tv_sec, tiempo.tv_usec);
@@ -49,10 +49,12 @@ int main(int32_t argc, char const *argv[])
                 write(1, timestamp, n);
                 write(1, "\n", strlen("\n"));
                 respuesta.sendReply((char *)&request->requestId, suma);
-            } else {
-                tiempo.tv_sec = 0; 
+            }
+            else
+            {
+                tiempo.tv_sec = 0;
                 tiempo.tv_usec = 0;
-                respuesta.sendReply( (char *)&tiempo, REPETIDO );
+                respuesta.sendReply((char *)&tiempo, REPETIDO);
             }
             //cout << endl;
         }
