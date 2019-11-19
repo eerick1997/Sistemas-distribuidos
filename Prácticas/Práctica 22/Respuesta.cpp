@@ -15,9 +15,10 @@ struct mensaje *Respuesta::getRequest(void)
     memcpy(clientePaqueteDatagrama, &paq, sizeof(paq));
     memcpy(&petition, clientePaqueteDatagrama->obtieneDatos(), clientePaqueteDatagrama->obtieneLongitud());
     //printf("%d | %d \n", petition.requestId, requestIDR);
-    if( petition.requestId == requestIDR )
+    if (petition.requestId == requestIDR)
         requestIDO = petition.requestId, requestIDR++;
-    else {
+    else
+    {
         printf("Mensaje repetido\n");
         return NULL;
     }
@@ -28,13 +29,13 @@ void Respuesta::sendReply(char *respuesta, int type)
 {
     //if (requestIDO == requestIDR)
     //{
-        mensaje response = {.messageType = type, .requestId = requestIDO, .operationId = suma};
-        memcpy(response.arguments, respuesta, sizeof(respuesta));
-        PaqueteDatagrama paqueteDatagrama(sizeof(struct mensaje));
-        paqueteDatagrama.inicializaDatos((char *)&response);
-        paqueteDatagrama.inicializaIp(clientePaqueteDatagrama->obtieneDireccion());
-        paqueteDatagrama.inicializaPuerto(clientePaqueteDatagrama->obtienePuerto());
-        socketlocal->envia(paqueteDatagrama);
-        
+    mensaje response = {.messageType = type, .requestId = requestIDO, .operationId = suma};
+    memcpy(response.arguments, respuesta, sizeof(respuesta));
+    PaqueteDatagrama paqueteDatagrama(sizeof(struct mensaje));
+    paqueteDatagrama.inicializaDatos((char *)&response);
+    paqueteDatagrama.inicializaIp(clientePaqueteDatagrama->obtieneDireccion());
+    paqueteDatagrama.inicializaPuerto(clientePaqueteDatagrama->obtienePuerto());
+    socketlocal->envia(paqueteDatagrama);
+    
     //}
 }
