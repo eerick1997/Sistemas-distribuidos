@@ -64,15 +64,15 @@ int main(int32_t argc, char const *argv[])
     char data[34];
     timeval timestamp;
 
-    if (argc != 5)
+    if (argc != 7)
     {
-        cout << "Ingresar nombre del archivo, nombre archivo a leer, puerto, IP, numero de registros " << endl;
+        cout << "Ingresar nombre del archivo, nombre archivo a leer, puerto, IP1, IP2, IP3, numero de registros " << endl;
         exit(-1);
     }
     if ((file_to_read = open(argv[1], O_RDONLY)) == -1)
         exit(-1);
 
-    for (int32_t i = 0; i < atoi(argv[4]); i++)
+    for (int32_t i = 0; i < atoi(argv[6]); i++)
     {
         read(file_to_read, data, 32);
         //write(1, data, 32);
@@ -83,11 +83,11 @@ int main(int32_t argc, char const *argv[])
         }
         else if (data[9] == '4' || data[9] == '5' || data[9] == '6')
         {
-            thread t2(termina46, data, i, (char *)argv[3], atoi(argv[2]));
+            thread t2(termina46, data, i, (char *)argv[4], atoi(argv[2]));
         }
         else if (data[9] == '7' || data[9] == '8' || data[9] == '9')
         {
-            thread t2(termina79, data, i, (char *)argv[3], atoi(argv[2]));
+            thread t2(termina79, data, i, (char *)argv[5], atoi(argv[2]));
         }
     }
 
