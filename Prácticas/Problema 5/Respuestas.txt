@@ -1,0 +1,10 @@
+5k votos 4:50
+10k votos local: 7S
+10k votos cliente-servidor: 12 min
+20k votos cliente-servodor: 25 min
+
+Con trie
+0.007s
+10k votos cliente-servidor: 9 min
+memoria 10K votos 152K
+memoria 70M votos casi 1GB
