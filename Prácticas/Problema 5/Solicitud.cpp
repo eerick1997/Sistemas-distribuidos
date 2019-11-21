@@ -18,7 +18,7 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
     datos.messageType = 1123456;
     datos.requestId = requestID;
     datos.operationId = suma;
-    memcpy(datos.arguments, arguments, 32 * sizeof(char));
+    memcpy(datos.arguments, arguments, 32);
     PaqueteDatagrama paq((char *)&datos, sizeof(datos), IP, puerto);
 
     int result = -1;
@@ -34,7 +34,7 @@ char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *argume
             {
 
                 //printf("REPETIDO\n");
-                //printf("R  %d , O %d \n", response.requestId, requestID);
+                printf("R  %d , O %d \n", response.requestId, requestID);
                 if (response.requestId != requestID)
                 {
                     result = socketlocal->recibeTimeout(paq, segundos, microsegundos);

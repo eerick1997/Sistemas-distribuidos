@@ -14,7 +14,7 @@ struct mensaje *Respuesta::getRequest(void)
     socketlocal->recibe(paq);
     memcpy(clientePaqueteDatagrama, &paq, sizeof(paq));
     memcpy(&petition, clientePaqueteDatagrama->obtieneDatos(), clientePaqueteDatagrama->obtieneLongitud());
-    //printf("%d | %d \n", petition.requestId, requestIDR);
+    printf("%d | %d \n", petition.requestId, requestIDR);
     if (petition.requestId == requestIDR)
         requestIDO = petition.requestId, requestIDR++;
     else
@@ -36,6 +36,6 @@ void Respuesta::sendReply(char *respuesta, int type)
     paqueteDatagrama.inicializaIp(clientePaqueteDatagrama->obtieneDireccion());
     paqueteDatagrama.inicializaPuerto(clientePaqueteDatagrama->obtienePuerto());
     socketlocal->envia(paqueteDatagrama);
-    
+
     //}
 }
