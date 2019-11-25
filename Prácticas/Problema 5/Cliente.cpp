@@ -113,10 +113,10 @@ int main(int32_t argc, char const *argv[])
 
     thread term03(termina03, (char *)argv[1], atoi(argv[2]), (char *)argv[5], atoi(argv[8]));
     thread term46(termina46, (char *)argv[1], atoi(argv[3]), (char *)argv[6], atoi(argv[8]));
-    //thread term79(termina79, (char *)argv[1], atoi(argv[4]), (char *)argv[7], atoi(argv[8]));
+    thread term79(termina79, (char *)argv[1], atoi(argv[4]), (char *)argv[7], atoi(argv[8]));
     term03.join();
     term46.join();
-    //term79.join();
+    term79.join();
 
     return 0;
 }

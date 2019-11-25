@@ -10,5 +10,5 @@ private:
     mensaje lastResponse;
     SocketDatagrama *socketlocal;
     struct mensaje response;
-    static int requestID;
+    int requestID;
 };

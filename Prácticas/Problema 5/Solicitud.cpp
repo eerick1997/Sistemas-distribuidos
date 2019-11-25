@@ -1,11 +1,12 @@
 #include "Solicitud.h"
 #include <sys/time.h>
 
-int Solicitud::requestID = 0;
+//int Solicitud::requestID = 0;
 
 Solicitud::Solicitud()
 {
     socketlocal = new SocketDatagrama(0);
+    requestID = 0;
 }
 
 char *Solicitud::doOperation(char *IP, int puerto, int operationId, char *arguments)
